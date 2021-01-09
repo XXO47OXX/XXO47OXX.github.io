@@ -1,0 +1,1172 @@
+<!DOCTYPE html>
+
+
+<html lang="zh-CN">
+
+
+<head>
+  <meta charset="utf-8" />
+    
+  <meta name="description" content="我的喜欢只自私地给我喜欢的和喜欢我的" />
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+  <title>
+    Store inventory management system |  The light will fade, the time as come
+  </title>
+  <meta name="generator" content="hexo-theme-ayer">
+  
+  <link rel="shortcut icon" href="/favicon.ico" />
+  
+  
+<link rel="stylesheet" href="/dist/main.css">
+
+  
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/css/remixicon.min.css">
+
+  
+<link rel="stylesheet" href="/css/custom.css">
+
+  
+  
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+
+  
+  
+
+  
+
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="stylesheet" href="/css/prism-tomorrow.css" type="text/css"></head>
+
+</html>
+
+<body>
+  <div id="app">
+    
+      
+      <canvas width="1777" height="841"
+        style="position: fixed; left: 0px; top: 0px; z-index: 99999; pointer-events: none;"></canvas>
+      
+    <main class="content on">
+      <section class="outer">
+  <article
+  id="post-Store-inventory-management-system"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  Store inventory management system
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/posts/3f14/" class="article-date">
+  <time datetime="2021-01-08T12:06:15.000Z" itemprop="datePublished">2021-01-08</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/data-struct/">data struct</a>
+  </div>
+  
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">1.4k</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">5 分钟</span>
+        </span>
+    </span>
+</div>
+ 
+    </div>
+      
+    <div class="tocbot"></div>
+
+
+
+
+  
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h2 id="1-问题描述"><a href="#1-问题描述" class="headerlink" title="1. 问题描述"></a><strong>1.</strong> 问题描述</h2><p>建立一商店存货管理系统，要求每次出货时取进货时间最早且最接近保质期中止时间的货物。<span class="github-emoji"><span>😄</span><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="https://github.githubassets.com/images/icons/emoji/unicode/1f604.png?v8" aria-hidden="true" onerror="this.parent.classList.add('github-emoji-fallback')"></span></p>
+<a id="more"></a>
+
+<p>[分步实施]</p>
+<p>1.初步完成总体设计，搭好框架，确定人机对话的界面，确定函数个数；</p>
+<p>2.完成最低要求：建立一个文件，包括5个种类的货物情况，能对商品信息进行扩充（追加），修改和删除以及简单的排序；</p>
+<p>3.进一步要求：扩充商品数量，以及完成系统查询功能。有兴趣的同学可以自己扩充系统功能。</p>
+<h2 id="2-需求分析"><a href="#2-需求分析" class="headerlink" title="2. 需求分析"></a><strong>2.</strong> 需求分析</h2><p>本题需要建立一个商品存货管理系统：</p>
+<p>1、需要实现一对多的记录对应。</p>
+<p>2、便捷查询货物信息。</p>
+<p>3、需要对货物信息进行排序。</p>
+<p>4、需要让程序系统对应用户的输入来实现功能。</p>
+<p>5、需要能找出进货时间最早且最接近保质期中止时间的货物的记录，并把它删除。</p>
+<p>6、退出程序。</p>
+<h2 id="3-算法设计"><a href="#3-算法设计" class="headerlink" title="3. 算法设计"></a><strong>3.</strong> 算法设计</h2><h3 id="3-1-算法思想"><a href="#3-1-算法思想" class="headerlink" title="3.1. 算法思想"></a><strong>3.1.</strong> 算法思想</h3><p>要储存货物的信息，数组不能完成，虽然数组可以储存多个信息，但元素的数据类型必需相同，所以采用结构体这一数据结构，同一结构可以储存多个类型的数据。本程序采用了数据结构中的线性表中的知识，是在C++语言的基础上编的。</p>
+<p>首先，应该建立一个单链表，链表的节点信息表存的有货物的基本信息。</p>
+<p>在建立好货物信息的表后进行货物信息的查询操作，在进行查询时首先要确认库存里是否有这个货物，再输出货物的状态信息。</p>
+<p>删除操作，此操作首先要找到要删除的货物信息，然后将此节点的前一节点的后续指针直接指向要删除的结点的后续指针，并且释放要删除的结点空间即可。    </p>
+<p>货物信息修改，首先我到要修改的货物，然后输入要修改的货物信息，将输入信总直接覆盖在原有信息上即可。</p>
+<p>货物信息总输出，遍历整个链表并输出。</p>
+<p>为了实现货物信息的排序，建立数据结构时记录了货物种类量，来便于用冒泡法实现各个货物信息的排序。入库时间有两个主要的因素，月与日，这里我用了doule类型来储存这个数据，便可以直接进行数据大小的比较。</p>
+<p>货物进货时间最早且最接近保质期中止时间的货物记录，用了两个指针来遍历链表来找到满足的记录。再新定义一个指针来实现删除操作。</p>
+<h3 id="3-2-数据结构"><a href="#3-2-数据结构" class="headerlink" title="3.2. 数据结构"></a><strong>3.2.</strong> 数据结构</h3><pre class=" language-c++"><code class="language-c++">typedef struct LNode`
+
+`{   int num;  /*商品编号*/`
+
+  `char name[100]; /*商品名称*/`
+
+  `double price;  /*商品单价*/`
+
+  `int count;   /*数量*/`
+
+  `double intime;`
+
+  `double exp;`
+
+  `int length;`
+
+  `struct LNode *next;} LNode,*List;</code></pre>
+<h3 id="3-3-算法设计"><a href="#3-3-算法设计" class="headerlink" title="3.3. 算法设计"></a><strong>3.3.</strong> 算法设计</h3><h3 id="3-4-函数之间的调用关系"><a href="#3-4-函数之间的调用关系" class="headerlink" title="3.4. 函数之间的调用关系"></a><strong>3.4.</strong> 函数之间的调用关系</h3><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml1300\wps1.jpg" alt="img"> </p>
+<h2 id="4-调试分析"><a href="#4-调试分析" class="headerlink" title="4. 调试分析"></a><strong>4.</strong> 调试分析</h2><h3 id="4-1-调试中出现的问题及解决方案"><a href="#4-1-调试中出现的问题及解决方案" class="headerlink" title="4.1. 调试中出现的问题及解决方案"></a><strong>4.1.</strong> 调试中出现的问题及解决方案</h3><p>1、最开始用char定义日期信息，排序用基排序来实现，代码太过复杂。</p>
+<p>解决方案：后改用两个int变量来分别记录月和日，也差强人意。最后用double类型来定义日期信息，输入、排序、输出的代码就轻巧了许多。</p>
+<p>2、货物信息使用链表来记录是，不方便使用最原始的冒泡排序算法。后改用while循环和三个指针来实现冒泡遍历以及数据交换。当货物数过大时，该方法易出现指针指空。</p>
+<p>解决方案：在货物信息结构体定义时，增设定义货物信息数，来便于记录排序循环应进行的次数。</p>
+<p>3、调用swap函数来实现指针数据域值交换时，程序无法运行。</p>
+<p>解决方案：不另外调用函数来实现交换，直接在原函数中实现交换。</p>
+<h3 id="4-2-优点及不足"><a href="#4-2-优点及不足" class="headerlink" title="4.2. 优点及不足"></a><strong>4.2.</strong> 优点及不足</h3><p>单链表来实现，便利了货物记录的插入和删除，但当在查找时，没有用数组实现快速。</p>
+<p>用int来定义货物编号，不够灵活，也不够规整。</p>
+<p>货物库存数用冒泡排序来实现，简单但不够高效。</p>
+<h3 id="4-3-算法的性能分析"><a href="#4-3-算法的性能分析" class="headerlink" title="4.3. 算法的性能分析"></a><strong>4.3.</strong> 算法的性能分析</h3><h3 id="4-4-改进思路"><a href="#4-4-改进思路" class="headerlink" title="4.4.改进思路"></a>4.4.改进思路</h3><p>1、用堆排序来实现库存量的排序，在库存量大的时候，冒泡排序是低效的，算法时间复杂度是O(n^2)，而堆排序是高效的，算法时间复杂的是O(nlogn)。</p>
+<p>2、可以用冒泡排序来实现货物名称的排序。</p>
+<h2 id="5-实验结果"><a href="#5-实验结果" class="headerlink" title="5. 实验结果"></a><strong>5.</strong> 实验结果</h2><p>输入</p>
+<p><code>7</code></p>
+<p><code>1256 wine 100 11.22 11.30 80</code></p>
+<p><code>3145 milk 3.5 7.05 12.1 15</code> </p>
+<p><code>4001 coco 2 11.6 12.5 9</code></p>
+<p><code>5002 cake 15 8.20 12.8 10</code></p>
+<p><code>6358 tea 22 12.10 4.05 30</code></p>
+<p><code>1211 book 15 10.01 999 12</code></p>
+<p><code>3455 hotdog 2  11.22 11.23 20</code></p>
+<p><code>Out</code></p>
+<p><code>Print</code></p>
+<p>输出如图所示：</p>
+<p>  <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml1300\wps2.jpg" alt="img"></p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="file:///C:\Users\ADMINI~1\AppData\Local\Temp\ksohtml1300\wps3.jpg" alt="img"> </p>
+<ol start="6">
+<li><h2 id="实验源代码"><a href="#实验源代码" class="headerlink" title="实验源代码"></a>实验源代码</h2></li>
+</ol>
+<pre class=" language-c++"><code class="language-c++">#include<iostream>
+#include<cstring>
+#include<iomanip>
+#include<stdio.h>
+#include<stdlib.h>
+#define side 20
+#define longside 72
+using namespace std;
+typedef struct LNode
+{
+    int num;  /*商品编号*/
+    char name[100]; /*商品名称*/
+    double price;  /*商品单价*/
+    int count;    /*数量*/
+    double intime;
+    double exp;
+    int length;
+    struct LNode *next;
+} LNode,*List;
+void menu();
+void menu2();
+void Sortcount(List L);
+void Sortintime(List L);
+void out(List &L);
+void Sortprice(List L);
+void query(List &L,char name[]);
+void modify_L(List &L);
+void CreateList_L(List &L,int n);
+void add_L(List &L);
+void del_L(List &L);
+void print_L(List L);
+void SortNum(List L);
+int main()
+{
+    List L;//定义货物单L
+    int n,o=1;
+    char op[20];
+    char name[21];
+    menu();
+    cout<<"||→请输入待入库商品的个数：";
+    cin>>n;//输入货物单人数
+    system("cls");
+    getchar();
+    if(n<=100&&n<<1)
+    {
+        CreateList_L(L,n);//创建货物货物单管理系统
+        getchar();
+        while(o)//执行所有操作
+        {
+            menu();
+            menu2();
+            cout<<"||→请输入要执行的操作：";
+            cin>>op;
+            if(!strcmp(op,"query"))//判断执行哪个操作
+            {
+                cout<<"||→请输入待查询的商品名称：";
+                cin>>name;
+                getchar();
+                query(L,name);//查询query
+            }
+            if(!strcmp(op,"modify"))
+            {
+                modify_L(L);/*插入*/
+            }
+            if(!strcmp(op,"add"))//判断执行哪个操作
+            {
+                add_L(L);/*添加*/
+            }
+            if(!strcmp(op,"del"))//判断执行哪个操作
+            {
+                del_L(L);/*删除*/
+            }
+            if(!strcmp(op,"print"))//判断执行哪个操作
+            {
+                system("cls");
+                print_L(L);//打印
+            }
+            if(!strcmp(op,"countsort"))//判断执行哪个操作
+            {
+                Sortcount(L);//排序打印
+            }
+            if(!strcmp(op,"exit"))//判断执行哪个操作
+            {
+                o=0;//退出
+            }
+            if(!strcmp(op,"intimesort"))//判断执行哪个操作
+            {
+                Sortintime(L);
+            }
+            if(!strcmp(op,"pricesort"))//判断执行哪个操作
+            {
+                Sortprice(L);
+            }
+            if(!strcmp(op,"out"))//判断执行哪个操作
+            {
+                out(L);//退出
+            }
+            system("pause");
+            system("cls");
+        }
+    }
+}
+void menu()
+{
+    cout<<setw(side+29)<<setfill('-')<<right<<"您已进行入商店存货管理系统"<<setw(side+3)<<" ";
+    cout<<endl<<"||"<<setw(side+25)<<right<<setfill(' ')<<"（@^︶^@）︿welcome!!!"<<setw(side+29+3-26-2)<<"||"<<endl;
+}
+void menu2()
+{
+    cout<<"||"<<setw(side+42)<<setfill(' ')<<right<<"[query]   [add]   [del]   [modify]   [print]   [exit]"<<setw(side-13)<<"||"<<endl;
+    cout<<"||"<<setw(side+40)<<setfill(' ')<<right<<"[countsort]   [intimesort]   [pricesort]   [out]"<<setw(side-11)<<"||"<<endl;
+    cout<<setw(side+29)<<setfill('-')<<right<<"-"<<setw(side+3)<<" "<<endl;
+}
+void CreateList_L(List &L,int n)/*创建*/
+{
+    L=new LNode;
+    L->next=NULL;
+    LNode *r;
+    L->length=n;
+    r=L;
+    int i=0;
+    for(i; i<n; i++)
+    {
+        cout<<"商品编号"<<setw(8)<<setfill(' ')<<" "<<"商品名称"<<setw(8)<<left<<" "<<"商品价格"<<setw(8)<<" "<<"商品入库时间(m.d)"<<setw(8)<<" "<<"商品过期时间(m.d)"<<setw(8)<<" "<<"商品库存数"<<setw(8)<<" "<<endl;
+        LNode *p;
+        p=new LNode;
+        cin>>p->num;
+        cin>>p->name;
+        cin>>p->price;
+        cin>>p->intime;
+        cin>>p->exp;
+        cin>>p->count;
+        p->next=NULL;
+        r->next=p;
+        r=p;
+        system("cls");
+    }
+}
+void add_L(List &L)/*添加货物信息*/
+{
+    cout<<setw(side+29)<<right<<setfill('-')<<"已进入通讯的添加模块"<<setw(side+3)<<" "<<endl;
+    LNode *p,*q;
+    p=L;
+    LNode *s;
+    s=new LNode;
+    cout<<setw(10)<<left<<"商品编号：";
+    cin>>s->num;
+    getchar();
+    cout<<setw(10)<<left<<"商品名称：";
+    cin>>s->name;
+    getchar();
+    cout<<setw(10)<<left<<"商品价格：";
+    cin>>s->price;
+    cout<<setw(10)<<left<<"商品的入库时间：";
+    cin>>s->intime;
+    getchar();
+    cout<<setw(10)<<left<<"商品的过期时间：";
+    cin>>s->exp;
+    getchar();
+    cout<<setw(10)<<left<<"商品的库存数：";
+    cin>>s->count;
+    s->next=NULL;
+    while(p->next&&p->next->num<s->num)
+    {
+        q=p;
+        p=p->next;
+    }
+    L->length++;
+    if(!p)
+        p=q;
+    s->next=p->next;
+    p->next=s;
+}
+void modify_L(List &L)/*修改货物信息*/
+{
+    cout<<setw(side+29)<<right<<setfill('-')<<"已进入通讯的修改模块"<<setw(side+3)<<" "<<endl;
+    if(L)
+    {
+        LNode *p;
+        LNode *q;
+        p=L;
+        string op;
+        string name;
+        cout<<"||→请输入您要进行的修改的商品名称：";
+        cin>>name;
+        cout<<"||→请输入您要进行的修改的商品信息（num/name/price/intime/exp/count）：";
+        cin>>op;
+        while(p->next&&p->name!=name)
+        {
+            p=p->next;
+        }
+        if(p->name==name)
+        {
+            cout<<"||→您要修改商品信息为：";
+            if(op=="num")
+            {
+                cin>>p->num;
+                getchar();
+            }
+            if(op=="name")
+            {
+                cin>>p->name;
+                getchar();
+            }
+            if(op=="price")
+                cin>>p->price;
+            if(op=="intime")
+            {
+                cin>>p->intime;
+                getchar();
+            }
+            if(op=="exp")
+            {
+                cin>>p->exp;
+                getchar();
+            }
+            if(op=="count")
+                cin>>p->count;
+        }
+    }
+}
+void del_L(List &L)/*删除货物*/
+{
+    cout<<"||→请输入待删除的商品名称：";
+    if(L)
+    {
+        L->length--;
+        LNode *p;
+        LNode *q;
+        p=L;
+        char name[21];
+        cin>>name;
+        getchar();
+        while(p&&strcmp(p->next->name,name))
+        {
+            p=p->next;
+        }
+        if(!strcmp(p->next->name,name))
+        {
+            q=p->next;
+            p->next=q->next;
+            delete q;
+        }
+        else
+            cout<<"||  NOT FOUND!"<<endl;
+    }
+}
+void query(List &L,char name[])/*查询*/
+{
+    LNode *p;
+    p=L;
+    int flag=1;
+    while(p->next&&strcmp((p->name),name))
+    {
+        p=p->next;
+    }/*在货物单中匹配货物名称*/
+    if(!strcmp((p->name),name))
+    {
+        cout<<"||    商品编号："<<setw(7)<<right<<setfill(' ')<<p->num<<endl;
+        cout<<"||    商品名称："<<setw(7)<<right<<p->name<<endl;
+        cout<<"||    商品价格："<<setw(5)<<right<<p->price<<"元"<<endl;
+        cout<<"||    入库时间："<<setw(2)<<right<<int(p->intime)<<"月"<<setw(2)<<right<<((p->intime)*100.00)-(int(p->intime)*100)<<"日"<<endl;
+        cout<<"||    过期时间："<<setw(2)<<right<<int(p->exp)<<"月"<<setw(2)<<right<<((p->exp)*100.00)-(int(p->exp)*100)<<"日"<<endl;
+        cout<<"||    库存数量："<<setw(5)<<right<<p->count<<"件"<<endl;
+        flag=0;
+    }/*若找到输出货物信息*/
+    if(flag)
+        cout<<"||  NOT FOUND!"<<endl;/*货物不存在*/
+}
+void Sortcount(List L)//按照库存量冒泡排序
+{
+    LNode *p,*q;
+    p=L->next;
+    q=new LNode;
+    for(int i=0; i<L->length; i++)
+    {
+        q=p;
+        for(int j=0; j<(L->length-i-1); j++)
+        {
+            if(q->count>q->next->count)
+            {
+                LNode *tem;
+                tem=new LNode;
+                strcpy(tem->name,q->next->name);
+                tem->num=q->next->num;
+                tem->intime=q->next->intime;
+                tem->price=q->next->price;
+                tem->exp=q->next->exp;
+                tem->count=q->next->count;
+                strcpy(q->next->name,q->name);
+                q->next->num=q->num;
+                q->next->intime=q->intime;
+                q->next->price=q->price;
+                q->next->exp=q->exp;
+                q->next->count=q->count;
+                strcpy(q->name,tem->name);
+                q->num=tem->num;
+                q->intime=tem->intime;
+                q->price=tem->price;
+                q->exp=tem->exp;
+                q->count=tem->count;
+
+            }
+            if(q->next)
+                q=q->next;
+            else
+                break;
+        }
+    }
+    print_L(L);
+
+}
+void Sortintime(List L)//按照入库时间冒泡排序
+{
+    LNode *p,*q;
+    p=L->next;
+    q=new LNode;
+    for(int i=0; i<L->length; i++)
+    {
+        q=p;
+        for(int j=0; j<(L->length-i-1); j++)
+        {
+            int flag=0;
+            if(q->intime==q->next->intime&&q->exp<q->next->exp)
+            {
+                flag=1;
+            }
+            if(q->intime>q->next->intime||flag)
+            {
+                LNode *tem;
+                tem=new LNode;
+                strcpy(tem->name,q->next->name);
+                tem->num=q->next->num;
+                tem->intime=q->next->intime;
+                tem->price=q->next->price;
+                tem->exp=q->next->exp;
+                tem->count=q->next->count;
+                strcpy(q->next->name,q->name);
+                q->next->num=q->num;
+                q->next->intime=q->intime;
+                q->next->price=q->price;
+                q->next->exp=q->exp;
+                q->next->count=q->count;
+                strcpy(q->name,tem->name);
+                q->num=tem->num;
+                q->intime=tem->intime;
+                q->price=tem->price;
+                q->exp=tem->exp;
+                q->count=tem->count;
+
+            }
+            if(q->next)
+                q=q->next;
+            else
+                break;
+        }
+    }
+    print_L(L);
+
+}
+void Sortprice(List L)//按照单价冒泡排序
+{
+    LNode *p,*q;
+    p=L->next;
+    q=new LNode;
+    for(int i=0; i<L->length; i++)
+    {
+        q=p;
+        for(int j=0; j<(L->length-i-1); j++)
+        {
+            if(q->price>q->next->price)
+            {
+                LNode *tem;
+                tem=new LNode;
+                strcpy(tem->name,q->next->name);
+                tem->num=q->next->num;
+                tem->intime=q->next->intime;
+                tem->price=q->next->price;
+                tem->exp=q->next->exp;
+                tem->count=q->next->count;
+                strcpy(q->next->name,q->name);
+                q->next->num=q->num;
+                q->next->intime=q->intime;
+                q->next->price=q->price;
+                q->next->exp=q->exp;
+                q->next->count=q->count;
+                strcpy(q->name,tem->name);
+                q->num=tem->num;
+                q->intime=tem->intime;
+                q->price=tem->price;
+                q->exp=tem->exp;
+                q->count=tem->count;
+
+            }
+            if(q->next)
+                q=q->next;
+            else
+                break;
+        }
+    }
+    print_L(L);
+
+}
+
+void out(List &L)//按照优先出库
+{
+    cout<<setw(side+19)<<right<<setfill('*')<<"出库成功"<<setw(side+13)<<" "<<endl;
+    LNode *q;
+    LNode *mintime;
+    mintime=new LNode;
+    q=new LNode;
+    mintime=L;
+    q=mintime->next;
+    while(q)
+    {
+        int flag=0;
+        if(mintime->next->intime==q->intime&&mintime->next->exp>q->exp)
+        {
+            flag=1;
+        }
+        if(mintime->next->intime>q->intime||flag)
+        {
+            mintime->next=q;
+        }
+        if(q->next)
+            q=q->next;
+        else
+            break;
+    }
+    if(mintime)
+    {
+        LNode *p;
+        p=mintime->next;
+        mintime->next=p->next;
+        delete p;
+    }
+}
+void print_L(List L)/*打印*/
+{
+    LNode *p;
+    p=L->next;
+    cout<<"商品编号"<<setw(8)<<setfill(' ')<<" "<<"商品名称"<<setw(8)<<left<<" "<<"商品价格"<<setw(8)<<" "<<"商品入库时间"<<setw(8)<<" "<<"商品过期时间"<<setw(8)<<" "<<"商品库存数"<<setw(8)<<" "<<endl;
+    while(p)
+    {
+        cout<<setw(16)<<left<<p->num<<setw(16)<<left<<p->name<<setw(16)<<left<<p->price<<setw(20)<<left<<p->intime<<setw(20)<<left<<p->exp<<setw(8)<<left<<p->count<<endl;
+        p=p->next;
+    }
+}
+
+</code></pre>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://xxo47oxx.github.io/posts/3f14/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E5%8D%95%E9%93%BE%E8%A1%A8/" rel="tag">单链表</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/posts/3eeb/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">Hello World</div>
+      </a>
+    
+  </nav>
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+  <div id="vcomments"></div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/valine@1.4.14/dist/Valine.min.js"></script>
+<script>
+  new Valine({
+    el: "#vcomments",
+    app_id: "SEOMqhB2pQ95cENmL2EDoUfA-gzGzoHsz",
+    app_key: "LKSHaH1ClesomwMoJ7HOdujK",
+    path: window.location.pathname,
+    avatar: "monsterid",
+    placeholder: "给我的文章加点评论吧~",
+    recordIP: true,
+  });
+  const infoEle = document.querySelector("#vcomments .info");
+  if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+    infoEle.childNodes.forEach(function (item) {
+      item.parentNode.removeChild(item);
+    });
+  }
+</script>
+<style>
+  #vcomments-box {
+    padding: 5px 30px;
+  }
+
+  @media screen and (max-width: 800px) {
+    #vcomments-box {
+      padding: 5px 0px;
+    }
+  }
+
+  #vcomments-box #vcomments {
+    background-color: #fff;
+  }
+
+  .v .vlist .vcard .vh {
+    padding-right: 20px;
+  }
+
+  .v .vlist .vcard {
+    padding-left: 10px;
+  }
+</style>
+
+ 
+   
+     
+</article>
+
+</section>
+      <footer class="footer">
+  <div class="outer">
+    <ul>
+      <li>
+        Copyrights &copy;
+        2021
+        <i class="ri-heart-fill heart_icon"></i> 林某某
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        
+        由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+        <span class="division">|</span>
+        主题 - <a href="https://github.com/Shen-Yu/hexo-theme-ayer" target="_blank">Ayer</a>
+        
+      </li>
+    </ul>
+    <ul>
+      <li>
+        
+        
+        <span>
+  <span><i class="ri-user-3-fill"></i>访问人数:<span id="busuanzi_value_site_uv"></span></s>
+  <span class="division">|</span>
+  <span><i class="ri-eye-fill"></i>浏览次数:<span id="busuanzi_value_page_pv"></span></span>
+</span>
+        
+      </li>
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      
+    </ul>
+    <ul>
+      <li>
+        <!-- cnzz统计 -->
+        
+        <script type="text/javascript" src='https://s9.cnzz.com/z_stat.php?id=1278069914&amp;web_id=1278069914'></script>
+        
+      </li>
+    </ul>
+  </div>
+</footer>
+      <div class="float_btns">
+        <div class="totop" id="totop">
+  <i class="ri-arrow-up-line"></i>
+</div>
+
+<div class="todark" id="todark">
+  <i class="ri-moon-line"></i>
+</div>
+
+      </div>
+    </main>
+    <aside class="sidebar on">
+      <button class="navbar-toggle"></button>
+<nav class="navbar">
+  
+  <div class="logo">
+    <a href="/"><img src="/images/penguin-side.png" alt="The light will fade, the time as come"></a>
+  </div>
+  
+  <ul class="nav nav-main">
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/">主页</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/archives">归档</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/categories">分类</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags">标签</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/tags/%E6%97%85%E8%A1%8C/">旅行</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" target="_blank" rel="noopener" href="https://rc.qzone.qq.com/photo?_t_=0.36893008668902016">摄影</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/friends">友链</a>
+    </li>
+    
+    <li class="nav-item">
+      <a class="nav-item-link" href="/2021/about">关于我</a>
+    </li>
+    
+  </ul>
+</nav>
+<nav class="navbar navbar-bottom">
+  <ul class="nav">
+    <li class="nav-item">
+      
+      <a class="nav-item-link nav-item-search"  title="搜索">
+        <i class="ri-search-line"></i>
+      </a>
+      
+      
+      <a class="nav-item-link" target="_blank" href="/atom.xml" title="RSS Feed">
+        <i class="ri-rss-line"></i>
+      </a>
+      
+    </li>
+  </ul>
+</nav>
+<div class="search-form-wrap">
+  <div class="local-search local-search-plugin">
+  <input type="search" id="local-search-input" class="local-search-input" placeholder="Search...">
+  <div id="local-search-result" class="local-search-result"></div>
+</div>
+</div>
+    </aside>
+    <script>
+      if (window.matchMedia("(max-width: 768px)").matches) {
+        document.querySelector('.content').classList.remove('on');
+        document.querySelector('.sidebar').classList.remove('on');
+      }
+    </script>
+    <div id="mask"></div>
+
+<!-- #reward -->
+<div id="reward">
+  <span class="close"><i class="ri-close-line"></i></span>
+  <p class="reward-p"><i class="ri-cup-line"></i>请我喝杯咖啡吧~</p>
+  <div class="reward-box">
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/alipay.jpg">
+      <span class="reward-type">支付宝</span>
+    </div>
+    
+    
+    <div class="reward-item">
+      <img class="reward-img" src="https://cdn.jsdelivr.net/gh/Shen-Yu/cdn/img/wechat.jpg">
+      <span class="reward-type">微信</span>
+    </div>
+    
+  </div>
+</div>
+    
+<script src="/js/jquery-2.0.3.min.js"></script>
+
+
+<script src="/js/lazyload.min.js"></script>
+
+<!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js"></script>
+
+<script src="/dist/main.js"></script>
+
+<!-- ImageViewer -->
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css">
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"></script>
+
+<script>
+    function viewer_init() {
+        let pswpElement = document.querySelectorAll('.pswp')[0];
+        let $imgArr = document.querySelectorAll(('.article-entry img:not(.reward-img)'))
+
+        $imgArr.forEach(($em, i) => {
+            $em.onclick = () => {
+                // slider展开状态
+                // todo: 这样不好，后面改成状态
+                if (document.querySelector('.left-col.show')) return
+                let items = []
+                $imgArr.forEach(($em2, i2) => {
+                    let img = $em2.getAttribute('data-idx', i2)
+                    let src = $em2.getAttribute('data-target') || $em2.getAttribute('src')
+                    let title = $em2.getAttribute('alt')
+                    // 获得原图尺寸
+                    const image = new Image()
+                    image.src = src
+                    items.push({
+                        src: src,
+                        w: image.width || $em2.width,
+                        h: image.height || $em2.height,
+                        title: title
+                    })
+                })
+                var gallery = new PhotoSwipe(pswpElement, PhotoSwipeUI_Default, items, {
+                    index: parseInt(i)
+                });
+                gallery.init()
+            }
+        })
+    }
+    viewer_init()
+</script>
+
+<!-- MathJax -->
+
+<!-- Katex -->
+
+<!-- busuanzi  -->
+
+
+<script src="/js/busuanzi-2.3.pure.min.js"></script>
+
+
+<!-- ClickLove -->
+
+<!-- ClickBoom1 -->
+
+<!-- ClickBoom2 -->
+
+
+<script src="/js/clickBoom2.js"></script>
+
+
+<!-- CodeCopy -->
+
+
+<link rel="stylesheet" href="/css/clipboard.css">
+
+<script src="https://cdn.jsdelivr.net/npm/clipboard@2/dist/clipboard.min.js"></script>
+<script>
+  function wait(callback, seconds) {
+    var timelag = null;
+    timelag = window.setTimeout(callback, seconds);
+  }
+  !function (e, t, a) {
+    var initCopyCode = function(){
+      var copyHtml = '';
+      copyHtml += '<button class="btn-copy" data-clipboard-snippet="">';
+      copyHtml += '<i class="ri-file-copy-2-line"></i><span>COPY</span>';
+      copyHtml += '</button>';
+      $(".highlight .code pre").before(copyHtml);
+      $(".article pre code").before(copyHtml);
+      var clipboard = new ClipboardJS('.btn-copy', {
+        target: function(trigger) {
+          return trigger.nextElementSibling;
+        }
+      });
+      clipboard.on('success', function(e) {
+        let $btn = $(e.trigger);
+        $btn.addClass('copied');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-checkbox-circle-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPIED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-checkbox-circle-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+      clipboard.on('error', function(e) {
+        e.clearSelection();
+        let $btn = $(e.trigger);
+        $btn.addClass('copy-failed');
+        let $icon = $($btn.find('i'));
+        $icon.removeClass('ri-file-copy-2-line');
+        $icon.addClass('ri-time-line');
+        let $span = $($btn.find('span'));
+        $span[0].innerText = 'COPY FAILED';
+        
+        wait(function () { // 等待两秒钟后恢复
+          $icon.removeClass('ri-time-line');
+          $icon.addClass('ri-file-copy-2-line');
+          $span[0].innerText = 'COPY';
+        }, 2000);
+      });
+    }
+    initCopyCode();
+  }(window, document);
+</script>
+
+
+<!-- CanvasBackground -->
+
+
+<script src="/js/dz.js"></script>
+
+
+
+    
+    <div id="music">
+    
+    
+    
+    <iframe frameborder="no" border="1" marginwidth="0" marginheight="0" width="200" height="52"
+        src="//music.163.com/outchain/player?type=2&id=22707008&auto=1&height=32"></iframe>
+</div>
+
+<style>
+    #music {
+        position: fixed;
+        right: 15px;
+        bottom: 0;
+        z-index: 998;
+    }
+</style>
+    
+  </div>
+<script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+
+</html>
