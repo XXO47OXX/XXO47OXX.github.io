@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    Hello World |  The light will fade, the time as come
+    novel coronavirus Knowledge Graph learning（二） |  The light will fade, the time as come
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -51,7 +51,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-hello-world"
+  id="post-novel-coronavirus-Knowledge-Graph-learning（二）"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -62,22 +62,22 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  Hello World
+  novel coronavirus Knowledge Graph learning（二）
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/posts/3eeb/" class="article-date">
-  <time datetime="2021-01-07T16:24:02.985Z" itemprop="datePublished">2021-01-08</time>
+      <a href="/posts/ebc6/" class="article-date">
+  <time datetime="2021-06-26T03:30:43.000Z" itemprop="datePublished">2021-06-26</time>
 </a>   
 <div class="word_count">
     <span class="post-time">
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">73</span>
+            <span class="post-count">615</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">1 分钟</span>
+            <span class="post-count">2 分钟</span>
         </span>
     </span>
 </div>
@@ -101,15 +101,51 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.<a id="more"></a></p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+  <h1 id="data-py-所有数据处理的入口文件"><a href="#data-py-所有数据处理的入口文件" class="headerlink" title="data.py //所有数据处理的入口文件"></a>data.py //所有数据处理的入口文件</h1><h2 id="一-data-py-所有数据处理的入口文件"><a href="#一-data-py-所有数据处理的入口文件" class="headerlink" title="一.  data.py //所有数据处理的入口文件"></a><strong>一.</strong>  data.py //所有数据处理的入口文件</h2><h3 id="1、def-database-exists-url-检查数据库是否存在-（from-database-py）"><a href="#1、def-database-exists-url-检查数据库是否存在-（from-database-py）" class="headerlink" title="1、def database_exists(url):检查数据库是否存在 （from database.py）"></a>1、def database_exists(url):检查数据库是否存在 （from database.py）</h3><p> 1.1如何从SQLAlchemy Engine实例获取连接URL？(How can I get a connection URL from an SQLAlchemy Engine instance?)</p>
+<p> 1.2${param.xxx}获取url中的参数<a id="more"></a></p>
+<pre><code>表达式${param.xxx}可以从url中获取参数放在页面中直接使用
+    比如：一个网址：127.0.0.1/test/testparam?test1=3&amp;test2=sss
+    用${param.test1}就可以直接获取到test1的值，也就是3
+    用${param.test2}就可以直接获取到test2的值，也就是sss
+${param.xxx} 就等价于 request.getparam("xxx")，也就是服务器从页面或者客户端获取的内容</code></pre>
+<p>1.3make_url(feom url.py)</p>
+<pre><code>给定一个字符串或unicode实例，生成一个新的URL实例。给定的字符串将根据RFC 1738规范进行解析,传递现有的URL对象，只返回该对象
+_parse_rfc1738_args(name_or_url)</code></pre>
+<p>1.3.1Python之isinstance() 函数判断数据类型(来自<a target="_blank" rel="noopener" href="https://blog.csdn.net/u013372487/article/details/45194681">https://blog.csdn.net/u013372487/article/details/45194681</a>)</p>
+<pre><code>isinstance
+    isinstance(object, classinfo)              判断实例是否是这个类或者object是变量
+    classinfo 是类型(tuple,dict,int,float)     判断变量是否是这个类型 
+    type() 不会认为子类是一种父类类型，不考虑继承关系。
+    isinstance() 会认为子类是一种父类类型，考虑继承关系。
+class objA: 
+pass 
+
+A = objA() 
+B = 'a','v' 
+C = 'a string' 
+
+print isinstance(A, objA) 
+print isinstance(B, tuple) 
+print isinstance(C, basestring) 
+输出结果： 
+    True 
+    True 
+    True 
+
+  isinstance 来判断一个对象是否是一个已知的类型说明如下:
+    isinstance(object, class-or-type-or-tuple) -&gt; bool
+
+    Return whether an object is an instance of a class or of a subclass thereof.
+    With a type as second argument, return whether that is the object's type.
+    The form using a tuple, isinstance(x, (A, B, ...)), is a shortcut for
+    isinstance(x, A) or isinstance(x, B) or ... (etc.).
+其第一个参数为对象，第二个为类型名或类型名的一个列表。其返回值为布尔型。若对象的类型与参数二的类型相同则返回True。若参数二为一个元组，则若对象类型与元组中类型名之一相同即返回True。
+&gt;&gt;&gt;isinstance(lst, list)
+True
+&gt;&gt;&gt;isinstance(lst, (int, str, list) )
+True</code></pre>
+<p>1.3.2  _parse_rfc1738_args(name):(feom url.py)</p>
+<h3 id="2、def-data-prepare-数据准备-data-prepare-py-train数据预处理，将给定训练数据做各种处理，构造字典等"><a href="#2、def-data-prepare-数据准备-data-prepare-py-train数据预处理，将给定训练数据做各种处理，构造字典等" class="headerlink" title="2、def data_prepare(): # 数据准备  data_prepare.py //train数据预处理，将给定训练数据做各种处理，构造字典等"></a>2、def data_prepare(): # 数据准备  data_prepare.py //train数据预处理，将给定训练数据做各种处理，构造字典等</h3><p>def kb_data_prepare(): 图谱数据预处理，将给定图谱做各种转换，构造字典等</p>
  
       <!-- reward -->
       
@@ -174,12 +210,12 @@
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://xxo47oxx.github.io/posts/3eeb/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://xxo47oxx.github.io/posts/ebc6/" alt="微信分享二维码">
     </div>
 </div>
 
 <div id="share-mask"></div>  
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E6%97%85%E8%A1%8C/" rel="tag">旅行</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Knowledge-Graph/" rel="tag">Knowledge Graph</a></li></ul>
 
     </footer>
   </div>
@@ -187,15 +223,11 @@
    
   <nav class="article-nav">
     
-      <a href="/posts/3f14/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            Store inventory management system
-          
-        </div>
-      </a>
     
+      <a href="/posts/0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">novel coronavirus Knowledge Graph learning（一）</div>
+      </a>
     
   </nav>
 

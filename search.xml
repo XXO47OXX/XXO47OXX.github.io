@@ -1,20 +1,291 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Hello World</title>
-    <url>/posts/3eeb/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
-<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
-<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
-<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
-<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    <title>novel coronavirus Knowledge Graph learning（二）</title>
+    <url>/posts/ebc6/</url>
+    <content><![CDATA[<h1 id="data-py-所有数据处理的入口文件"><a href="#data-py-所有数据处理的入口文件" class="headerlink" title="data.py //所有数据处理的入口文件"></a>data.py //所有数据处理的入口文件</h1><h2 id="一-data-py-所有数据处理的入口文件"><a href="#一-data-py-所有数据处理的入口文件" class="headerlink" title="一.  data.py //所有数据处理的入口文件"></a><strong>一.</strong>  data.py //所有数据处理的入口文件</h2><h3 id="1、def-database-exists-url-检查数据库是否存在-（from-database-py）"><a href="#1、def-database-exists-url-检查数据库是否存在-（from-database-py）" class="headerlink" title="1、def database_exists(url):检查数据库是否存在 （from database.py）"></a>1、def database_exists(url):检查数据库是否存在 （from database.py）</h3><p> 1.1如何从SQLAlchemy Engine实例获取连接URL？(How can I get a connection URL from an SQLAlchemy Engine instance?)</p>
+<p> 1.2${param.xxx}获取url中的参数<a id="more"></a></p>
+<pre><code>表达式${param.xxx}可以从url中获取参数放在页面中直接使用
+    比如：一个网址：127.0.0.1/test/testparam?test1=3&amp;test2=sss
+    用${param.test1}就可以直接获取到test1的值，也就是3
+    用${param.test2}就可以直接获取到test2的值，也就是sss
+${param.xxx} 就等价于 request.getparam("xxx")，也就是服务器从页面或者客户端获取的内容</code></pre>
+<p>1.3make_url(feom url.py)</p>
+<pre><code>给定一个字符串或unicode实例，生成一个新的URL实例。给定的字符串将根据RFC 1738规范进行解析,传递现有的URL对象，只返回该对象
+_parse_rfc1738_args(name_or_url)</code></pre>
+<p>1.3.1Python之isinstance() 函数判断数据类型(来自<a href="https://blog.csdn.net/u013372487/article/details/45194681">https://blog.csdn.net/u013372487/article/details/45194681</a>)</p>
+<pre><code>isinstance
+    isinstance(object, classinfo)              判断实例是否是这个类或者object是变量
+    classinfo 是类型(tuple,dict,int,float)     判断变量是否是这个类型 
+    type() 不会认为子类是一种父类类型，不考虑继承关系。
+    isinstance() 会认为子类是一种父类类型，考虑继承关系。
+class objA: 
+pass 
+
+A = objA() 
+B = 'a','v' 
+C = 'a string' 
+
+print isinstance(A, objA) 
+print isinstance(B, tuple) 
+print isinstance(C, basestring) 
+输出结果： 
+    True 
+    True 
+    True 
+
+  isinstance 来判断一个对象是否是一个已知的类型说明如下:
+    isinstance(object, class-or-type-or-tuple) -&gt; bool
+
+    Return whether an object is an instance of a class or of a subclass thereof.
+    With a type as second argument, return whether that is the object's type.
+    The form using a tuple, isinstance(x, (A, B, ...)), is a shortcut for
+    isinstance(x, A) or isinstance(x, B) or ... (etc.).
+其第一个参数为对象，第二个为类型名或类型名的一个列表。其返回值为布尔型。若对象的类型与参数二的类型相同则返回True。若参数二为一个元组，则若对象类型与元组中类型名之一相同即返回True。
+&gt;&gt;&gt;isinstance(lst, list)
+True
+&gt;&gt;&gt;isinstance(lst, (int, str, list) )
+True</code></pre>
+<p>1.3.2  _parse_rfc1738_args(name):(feom url.py)</p>
+<h3 id="2、def-data-prepare-数据准备-data-prepare-py-train数据预处理，将给定训练数据做各种处理，构造字典等"><a href="#2、def-data-prepare-数据准备-data-prepare-py-train数据预处理，将给定训练数据做各种处理，构造字典等" class="headerlink" title="2、def data_prepare(): # 数据准备  data_prepare.py //train数据预处理，将给定训练数据做各种处理，构造字典等"></a>2、def data_prepare(): # 数据准备  data_prepare.py //train数据预处理，将给定训练数据做各种处理，构造字典等</h3><p>def kb_data_prepare(): 图谱数据预处理，将给定图谱做各种转换，构造字典等</p>
 ]]></content>
       <tags>
-        <tag>旅行</tag>
+        <tag>Knowledge Graph</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>novel coronavirus Knowledge Graph learning（一）</title>
+    <url>/posts/0/</url>
+    <content><![CDATA[<p>2021.5.27</p>
+<h1 id="2-1-软件配置"><a href="#2-1-软件配置" class="headerlink" title="2.1. 软件配置"></a>2.1. 软件配置</h1><h1 id="2-1-1-pycharml连接github"><a href="#2-1-1-pycharml连接github" class="headerlink" title="2.1.1. pycharml连接github"></a>2.1.1. pycharml连接github</h1><p>login登录报错，可使用token登录。</p>
+<p>（指路来源：团哥：<a href="https://blog.csdn.net/j_447768433/article/details/117028458%EF%BC%89">https://blog.csdn.net/j_447768433/article/details/117028458）</a></p>
+<p>​    <a id="more"></a></p>
+<h1 id="2-1-2-Anaconda3"><a href="#2-1-2-Anaconda3" class="headerlink" title="2.1.2. Anaconda3"></a>2.1.2. Anaconda3</h1><h1 id="2-1-3-创建虚拟环境"><a href="#2-1-3-创建虚拟环境" class="headerlink" title="2.1.3. 创建虚拟环境"></a>2.1.3. 创建虚拟环境</h1><p>1、用Anaconda3创建虚拟环境，python=3.6</p>
+<p>conda create -n software_training python = 3.6</p>
+<p>2、切换环境 </p>
+<p>activate software_training</p>
+<p>3、安装tensorflow-gpu</p>
+<p>conda install tensorflow-gpu=2.1.0</p>
+<p>4、输入pip show tensorflow,显示具体信息，即安装成功。</p>
+<p>输入import tensorflow，无报错，即安装成功。</p>
+<p>5、下载pytorch1.4.0。</p>
+<p>conda install pytorch=1.4.0 -c soumith</p>
+<p>6、输入import torch，无报错，即安装成功。</p>
+<h1 id="2-2-问题及其解决"><a href="#2-2-问题及其解决" class="headerlink" title="2.2. 问题及其解决"></a>2.2. 问题及其解决</h1><h1 id="2-2-1-项目飘红"><a href="#2-2-1-项目飘红" class="headerlink" title="2.2.1. 项目飘红"></a>2.2.1. 项目飘红</h1><p>module飘红，可用pip install xxx安装。</p>
+<p>注：应进入相应的虚拟环境。注：个别module较大，可采取换源。</p>
+<h1 id="2-2-2-py2neo版本过低"><a href="#2-2-2-py2neo版本过低" class="headerlink" title="2.2.2. py2neo版本过低"></a>2.2.2. py2neo版本过低</h1><p>valueError</p>
+<p>ValueError：The following settings are not supported :{‘username‘: ‘neo4j“}</p>
+<p>问题解决：</p>
+<p>出现上述问题时是由于你的py2neo版本太高，新版本的写法不是这种解决办法：安装低版本的py2neo 例如4.3.0命令：</p>
+<p>pip install py2neo==4.3.0 -i <a href="https://pypi.douban.com/simple">https://pypi.douban.com/simple</a></p>
+<p>安装即可自动卸载之前的py2neo，并安装4.3.0版本的py2neo，问题解决。</p>
+<h1 id="2-2-3-路径错误"><a href="#2-2-3-路径错误" class="headerlink" title="2.2.3. 路径错误"></a>2.2.3. 路径错误</h1><p>ModuleNotFoundError</p>
+<p>同一个项目里面，导入自己写的模块时，出现如下情况：</p>
+<p>Traceback (most recent call last):</p>
+<p>  File “E:/project/spider.py”, line 9, in <module></module></p>
+<p>   from .config import *</p>
+<p> ModuleNotFoundError: No module named ‘<strong>main</strong>.config’; ‘<strong>main</strong>‘ is not a package  </p>
+<p>问题解决：</p>
+<p> 这是引入模块时采用from .xx import yy相对路径所致 补全路径即可 即from aa.bb.xx import yy</p>
+]]></content>
+      <categories>
+        <category>data struct</category>
+      </categories>
+      <tags>
+        <tag>Knowledge Graph</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>自定义页面搭建过程</title>
+    <url>/posts/3d45/</url>
+    <content><![CDATA[<a id="more"></a>]]></content>
+  </entry>
+  <entry>
+    <title>MySQL in IDEA</title>
+    <url>/posts/525e/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>How to catch a package with Burp Suite</title>
+    <url>/posts/9308/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>reduce maven&#39;s version</title>
+    <url>/posts/d774/</url>
+    <content><![CDATA[]]></content>
+  </entry>
+  <entry>
+    <title>javaEE environment</title>
+    <url>/posts/18e3/</url>
+    <content><![CDATA[<p>1 工具安装√</p>
+<ul>
+<li><p>（代码管理工具）下载git，在本地安装（代码管理工具）<a id="more"></a></p>
+</li>
+<li><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="D:\everfile\Work\hexo\source\images\git.png" alt="git"></p>
+</li>
+<li><p>（项目管理工具）下载maven，高于3的版本，在本地安装</p>
+</li>
+<li><h4 id="1-到Maven官网-http-maven-apache-org-下载软件"><a href="#1-到Maven官网-http-maven-apache-org-下载软件" class="headerlink" title="1. 到Maven官网(http://maven.apache.org)下载软件"></a>1. 到Maven官网(<a href="http://maven.apache.org)下载软件/">http://maven.apache.org)下载软件</a></h4><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="D:\everfile\Work\hexo\source\images\mavenzip.png" alt="mavenzip"></p>
+<p>注意：Maven软件依赖于Java，请先安装与配置好jdk</p>
+<p>可参考JDK安装与环境变量配置</p>
+<h4 id="2-直接解压apache-maven-3-6-0-bin-zip即可"><a href="#2-直接解压apache-maven-3-6-0-bin-zip即可" class="headerlink" title="2. 直接解压apache-maven-3.6.0-bin.zip即可"></a>2. 直接解压apache-maven-3.6.0-bin.zip即可</h4><p>Maven目录结构</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="D:\everfile\Work\hexo\source\images\Maven目录结构.png" alt="Maven目录结构"></p>
+<h4 id="3-把Maven的bin目录配置到环境变量中"><a href="#3-把Maven的bin目录配置到环境变量中" class="headerlink" title="3. 把Maven的bin目录配置到环境变量中"></a>3. 把Maven的bin目录配置到环境变量中</h4><p>新建系统变量</p>
+<p>变量名：M2_HOME</p>
+<p>变量值：D:\Program Files (x86)\apache-maven-3.6.3-bin\apache-maven-3.6.3</p>
+<p> 在Path系统变量新增环境变量%M2_HOME%\bin，然后保存</p>
+<h4 id="4-在命令提示符cmd下输入mvn-–version"><a href="#4-在命令提示符cmd下输入mvn-–version" class="headerlink" title="4. 在命令提示符cmd下输入mvn –version"></a>4. 在命令提示符cmd下输入mvn –version</h4><p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="D:\everfile\Work\hexo\source\images\maventest.png" alt="maventest"></p>
+<p>错误记录：</p>
+<p>一直mvn –version 出不了结果，修改环境设置中的path 为单独的语句。—2021/3/28</p>
+</li>
+</ul>
+<h2 id="Maven配置"><a href="#Maven配置" class="headerlink" title="Maven配置"></a>Maven配置</h2><h3 id="配置本地仓库位置"><a href="#配置本地仓库位置" class="headerlink" title="配置本地仓库位置"></a>配置本地仓库位置</h3><p>  Maven安装好之后默认配置了本地仓库，可以将本地仓库 理解为缓存，有了本地仓库就不用每次从远程仓库下载了.</p>
+<p>  在%user%/.m2/respository目录，但是通常不会使用Maven的默认本地仓库，而是修改maven的本地仓库的地址，修改Maven目录的conf/settings.xml</p>
+<ul>
+<li><p>本地仓库 ：用来存储从远程仓库或中央仓库下载的插件和 jar 包，项目使用一些插件或 jar 包， 优先从本地仓库查找</p>
+<p>默认本地仓库位置在 ${user.dir}/.m2/repository，${user.dir}表示 windows 用户目录。</p>
+<p>远程仓库：如果本地需要插件或者 jar 包，本地仓库没有，默认去远程仓库下载。</p>
+<p>远程仓库可以在互联网内也可以在局域网内。</p>
+<p>中央仓库 ：在 maven 软件中内置一个远程仓库地址 <a href="http://repo1.maven.org/maven2">http://repo1.maven.org/maven2</a> ，它是中 央仓库，服务于整个互联网，它是由 Maven 团队自己维护，里面存储了非常全的 jar 包，它包含了世界上大部分流行的开源项目构件。</p>
+<p>将 “repository.rar”解压至自己的 电脑上，如：解压在 D:\repository 目录下（可以放在没有中文及空格的目录下）。<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="C:\Users\Administrator\AppData\Roaming\Typora\typora-user-images\image-20210317094417019.png" alt="image-20210317094417019"></p>
+<h3 id="配置阿里云镜像"><a href="#配置阿里云镜像" class="headerlink" title="配置阿里云镜像"></a>配置阿里云镜像</h3><p>为了更好的下载速度，我们会选用国内镜像，这里配置的是阿里云镜像，修改Maven目录的conf/settings.xml</p>
+<p><mirrors><mirror></mirror></mirrors></p>
+<p><id>alimaven</id></p>
+<p><name>aliyun maven</name></p>
+<p><url><a href="http://maven.aliyun.com/nexus/content/groups/public/">http://maven.aliyun.com/nexus/content/groups/public/</a></url></p>
+<p><mirrorof>central</mirrorof>     </p>
+ 
+
+
+
+
+
+</li>
+</ul>
+<h3 id="设置Maven工程的默认jdk"><a href="#设置Maven工程的默认jdk" class="headerlink" title="设置Maven工程的默认jdk"></a>设置Maven工程的默认jdk</h3><p>  创建Maven项目的时候，默认编译的jdk版本是1.7，但是我们需要使用的是jdk1.8版本，所以需要修改Maven目录的conf/settings.xml</p>
+  <!-- 配置maven编译jdk版本 -->
+  <profile>
+  <id>jdk-1.8</id>
+  <activation>
+  <activebydefault>true</activebydefault>
+  <jdk>1.8</jdk>
+  </activation>
+  <properties>
+  <maven.compiler.source>1.8</maven.compiler.source>
+  <maven.compiler.target>1.8</maven.compiler.target>
+  <maven.compiler.compilerversion>1.8</maven.compiler.compilerversion>
+  </properties>
+  </profile>
+
+<ul>
+<li><p>2 Java 开发环境开安装</p>
+<ul>
+<li><p>下载JDK 8以下版本，在本地安装</p>
+<ul>
+<li><p>安装：官网：<a href="https://www.oracle.com/technetwork/java/javase/downloads">https://www.oracle.com/technetwork/java/javase/downloads</a></p>
+</li>
+<li><p>↑*<strong>*整个过程会有两次安装提示：一次是安装jdk,一次jre;\</strong><br>*<em>(注意不能安装到同一文件夹下）。***</em></p>
+</li>
+</ul>
+</li>
+<li><p>环境配置：</p>
+<ul>
+<li><p>我的电脑中系统属性中设置环境变量<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="D:\everfile\Work\hexo\source\images\环境变量.png" alt="环境变量"></p>
+</li>
+<li><p>3.点击下边的新建，切记是下边的新建按钮，变量名JAVA_HOME（代表你的java的jdk安装路径），变量值对应的是你的JDK的安装路径。</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<pre><code>  4.继续在系统变量里面新建一个CLASSPATH变量，其变量值如下图所示：.;%JAVA_HOME%\lib;%JAVA_HOME%\lib\tools.jar
+
+  ![classpath](D:\everfile\Work\hexo\source\images\classpath.png)
+
+    5.在系统变量里面找一个变量名是PATH的变量，需要在它的值域里面追加一段如下的代码，切记：windows10系统的path变量点击编辑的时候和win7的不一样，这两句话一定要分开写，win7则无所谓,如果win10变量写在一起的话，在测试jdk安装成功的时候输入java -version是可以的，但是输入 javac就会出问题，所以win10一定要谨慎
+
+    ```
+  %JAVA_HOME%\bin;
+    %JAVA_HOME%\jre\bin;
+    ```
+
+  6.测试jdk安装成功
+
+     （1）在cmd中输入java -version，出现如下界面则成功
+
+  )![jdktest](D:\everfile\Work\hexo\source\images\jdktest.png)
+
+     （2）在cmd中输入javac，出现如下界面则成功
+
+  ![javac-text](D:\everfile\Work\hexo\source\images\javac-text.png)
+
+  （2）在cmd中输入java，出现如下界面则成功
+
+  ![javatext](D:\everfile\Work\hexo\source\images\javatext.png)</code></pre>
+<ul>
+<li><p>下载Tomcat，在本地安装，不要启用“开机启动”服务</p>
+</li>
+<li><p>下载MySQL 5.X，在本地安装，安装过程中请牢记root密码</p>
+</li>
+</ul>
+<p>3 IDE安装</p>
+<ul>
+<li>下载Eclipse / IDEA，在本地安装</li>
+<li>上网破解</li>
+<li>配置IDE中的maven和git插件路径</li>
+</ul>
+<p>4 注册 gitee / github 帐号</p>
+<ul>
+<li><p>每人注册一个帐号</p>
+<ul>
+<li>组长创建 public类型项目，将地址置于小组主页，并分享给组员</li>
+<li>组员加入项目</li>
+</ul>
+<p>5 Check 项目</p>
+<ul>
+<li>在 IDEA/Eclipse 中，从小组项目地址创建本地工程（此处有坑）</li>
+</ul>
+<p>6 完善Canvas中小组的相关内容，学习使用Canvas平台</p>
+</li>
+</ul>
+]]></content>
+      <tags>
+        <tag>memoir</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>markerdown-learning</title>
+    <url>/posts/da69/</url>
+    <content><![CDATA[<p>当想象力<br>使未知事物有了形状<br>当诗人的笔<br>让它们成形并给空中的虚无<br>一处居所<br>一个名号</p>
+<p>–莎士比亚《仲夏夜之梦》</p>
+<a id="more"></a>
+
+<p>目标：</p>
+<p>​    1、语法</p>
+<p>​    2、工具选择</p>
+<p>“所见非所得”“耕耘式写作”—-需要手动切换进预览模式查看处理效果。</p>
+<p>Markerdown-&gt;标记语言  （何为标记语言</p>
+<p>核心：排版与内容同时输入（字符）</p>
+<blockquote>
+<p>“Markdown” is two things:<br>(1) a plain text formatting syntax;<br>(2) a software tool, that converts the plain text formatting to others。</p>
+</blockquote>
+<p>格式不随编辑器改变，方便导出与分享</p>
+]]></content>
+      <tags>
+        <tag>learn</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>‘基本环境配置记录’</title>
+    <url>/posts/eee9/</url>
+    <content><![CDATA[<h1 id="1-python安装"><a href="#1-python安装" class="headerlink" title="**1.**python安装"></a>**1.**python安装</h1><h2 id="简介"><a href="#简介" class="headerlink" title="**-**简介"></a>**-**简介<a id="more"></a></h2><h2 id="过程"><a href="#过程" class="headerlink" title="**-**过程"></a>**-**过程</h2><h3 id="●’◡’●-安装环境"><a href="#●’◡’●-安装环境" class="headerlink" title="(●’◡’●)安装环境"></a><strong><em>(●’◡’●)</em></strong>安装环境</h3><p>​     win10专业版 64位操作系统</p>
+<p>###STEP1###</p>
+<p>可以直接在python的官网下载相应操作系统平台的python安装包：<a href="https://www.python.org/downloads">https://www.python.org/downloads</a></p>
+]]></content>
+      <tags>
+        <tag>drops</tag>
       </tags>
   </entry>
   <entry>
@@ -541,6 +812,23 @@ void print_L(List L)/*打印*/
       </categories>
       <tags>
         <tag>单链表</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/posts/3eeb/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.<a id="more"></a></p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><pre class=" language-bash"><code class="language-bash">$ hexo new <span class="token string">"My New Post"</span></code></pre>
+<p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><pre class=" language-bash"><code class="language-bash">$ hexo server</code></pre>
+<p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><pre class=" language-bash"><code class="language-bash">$ hexo generate</code></pre>
+<p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><pre class=" language-bash"><code class="language-bash">$ hexo deploy</code></pre>
+<p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+]]></content>
+      <tags>
+        <tag>旅行</tag>
       </tags>
   </entry>
 </search>
