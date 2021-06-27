@@ -77,7 +77,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">615</span>
+            <span class="post-count">1.3k</span>
         </span>
     </span>
 
@@ -86,7 +86,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">5 分钟</span>
         </span>
     </span>
 </div>
@@ -101,18 +101,16 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h1 id="data-py-所有数据处理的入口文件"><a href="#data-py-所有数据处理的入口文件" class="headerlink" title="data.py //所有数据处理的入口文件"></a>data.py //所有数据处理的入口文件</h1><h2 id="一-data-py-所有数据处理的入口文件"><a href="#一-data-py-所有数据处理的入口文件" class="headerlink" title="一.  data.py //所有数据处理的入口文件"></a><strong>一.</strong>  data.py //所有数据处理的入口文件</h2><h3 id="1、def-database-exists-url-检查数据库是否存在-（from-database-py）"><a href="#1、def-database-exists-url-检查数据库是否存在-（from-database-py）" class="headerlink" title="1、def database_exists(url):检查数据库是否存在 （from database.py）"></a>1、def database_exists(url):检查数据库是否存在 （from database.py）</h3><p> 1.1如何从SQLAlchemy Engine实例获取连接URL？(How can I get a connection URL from an SQLAlchemy Engine instance?)</p>
-<p> 1.2${param.xxx}获取url中的参数<a id="more"></a></p>
-<pre><code>表达式${param.xxx}可以从url中获取参数放在页面中直接使用
+  <h1 id="data-py-所有数据处理的入口文件"><a href="#data-py-所有数据处理的入口文件" class="headerlink" title="data.py //所有数据处理的入口文件"></a>data.py //所有数据处理的入口文件</h1><a id="more"></a>
+
+<h2 id="一-data-py-所有数据处理的入口文件"><a href="#一-data-py-所有数据处理的入口文件" class="headerlink" title="一.  data.py //所有数据处理的入口文件"></a><strong>一.</strong>  data.py //所有数据处理的入口文件</h2><h3 id="1-create-db-tabels-创建数据库和表"><a href="#1-create-db-tabels-创建数据库和表" class="headerlink" title="1.create_db_tabels():创建数据库和表"></a>1.create_db_tabels():创建数据库和表</h3><h4 id="1-1、def-database-exists-url-检查数据库是否存在-（from-database-py）"><a href="#1-1、def-database-exists-url-检查数据库是否存在-（from-database-py）" class="headerlink" title="1.1、def database_exists(url):检查数据库是否存在 （from database.py）"></a>1.1、def database_exists(url):检查数据库是否存在 （from database.py）</h4><h5 id="1-1-1如何从SQLAlchemy-Engine实例获取连接URL？-How-can-I-get-a-connection-URL-from-an-SQLAlchemy-Engine-instance"><a href="#1-1-1如何从SQLAlchemy-Engine实例获取连接URL？-How-can-I-get-a-connection-URL-from-an-SQLAlchemy-Engine-instance" class="headerlink" title="1.1.1如何从SQLAlchemy Engine实例获取连接URL？(How can I get a connection URL from an SQLAlchemy Engine instance?)"></a>1.1.1如何从SQLAlchemy Engine实例获取连接URL？(How can I get a connection URL from an SQLAlchemy Engine instance?)</h5><h5 id="1-1-2-param-xxx-获取url中的参数"><a href="#1-1-2-param-xxx-获取url中的参数" class="headerlink" title="1.1.2${param.xxx}获取url中的参数"></a>1.1.2${param.xxx}获取url中的参数</h5><pre><code>表达式${param.xxx}可以从url中获取参数放在页面中直接使用
     比如：一个网址：127.0.0.1/test/testparam?test1=3&amp;test2=sss
     用${param.test1}就可以直接获取到test1的值，也就是3
     用${param.test2}就可以直接获取到test2的值，也就是sss
 ${param.xxx} 就等价于 request.getparam("xxx")，也就是服务器从页面或者客户端获取的内容</code></pre>
-<p>1.3make_url(feom url.py)</p>
-<pre><code>给定一个字符串或unicode实例，生成一个新的URL实例。给定的字符串将根据RFC 1738规范进行解析,传递现有的URL对象，只返回该对象
+<h5 id="1-1-3make-url-feom-url-py"><a href="#1-1-3make-url-feom-url-py" class="headerlink" title="1.1.3make_url(feom url.py)"></a>1.1.3make_url(feom url.py)</h5><pre><code>给定一个字符串或unicode实例，生成一个新的URL实例。给定的字符串将根据RFC 1738规范进行解析,传递现有的URL对象，只返回该对象
 _parse_rfc1738_args(name_or_url)</code></pre>
-<p>1.3.1Python之isinstance() 函数判断数据类型(来自<a target="_blank" rel="noopener" href="https://blog.csdn.net/u013372487/article/details/45194681">https://blog.csdn.net/u013372487/article/details/45194681</a>)</p>
-<pre><code>isinstance
+<h6 id="1-1-3-1Python之isinstance-函数判断数据类型-来自https-blog-csdn-net-u013372487-article-details-45194681"><a href="#1-1-3-1Python之isinstance-函数判断数据类型-来自https-blog-csdn-net-u013372487-article-details-45194681" class="headerlink" title="1.1.3.1Python之isinstance() 函数判断数据类型(来自https://blog.csdn.net/u013372487/article/details/45194681)"></a>1.1.3.1Python之isinstance() 函数判断数据类型(来自<a target="_blank" rel="noopener" href="https://blog.csdn.net/u013372487/article/details/45194681">https://blog.csdn.net/u013372487/article/details/45194681</a>)</h6><pre><code>isinstance
     isinstance(object, classinfo)              判断实例是否是这个类或者object是变量
     classinfo 是类型(tuple,dict,int,float)     判断变量是否是这个类型 
     type() 不会认为子类是一种父类类型，不考虑继承关系。
@@ -144,8 +142,73 @@ print isinstance(C, basestring)
 True
 &gt;&gt;&gt;isinstance(lst, (int, str, list) )
 True</code></pre>
-<p>1.3.2  _parse_rfc1738_args(name):(feom url.py)</p>
+<h6 id="1-1-3-2-parse-rfc1738-args-name-feom-url-py"><a href="#1-1-3-2-parse-rfc1738-args-name-feom-url-py" class="headerlink" title="1.1.3.2  _parse_rfc1738_args(name):(feom url.py)"></a>1.1.3.2  _parse_rfc1738_args(name):(feom url.py)</h6><p>方法（_parse_rfc1738_args），对传入的url进行解析，找到各个部分。 然后返回的，是URL这个类的一个实例。</p>
 <h3 id="2、def-data-prepare-数据准备-data-prepare-py-train数据预处理，将给定训练数据做各种处理，构造字典等"><a href="#2、def-data-prepare-数据准备-data-prepare-py-train数据预处理，将给定训练数据做各种处理，构造字典等" class="headerlink" title="2、def data_prepare(): # 数据准备  data_prepare.py //train数据预处理，将给定训练数据做各种处理，构造字典等"></a>2、def data_prepare(): # 数据准备  data_prepare.py //train数据预处理，将给定训练数据做各种处理，构造字典等</h3><p>def kb_data_prepare(): 图谱数据预处理，将给定图谱做各种转换，构造字典等</p>
+<h3 id="3-main（）"><a href="#3-main（）" class="headerlink" title="3.main（）"></a>3.main（）</h3><pre><code>def main():
+    parser = argparse.ArgumentParser(description="基础，通用parser")# 构造解析器对象
+    # logging config 日志配置
+    parser.add_argument('--stream_log', action="store_true", help="是否将日志信息输出到标准输出")  # log print到屏幕
+    #
+    group = parser.add_mutually_exclusive_group(required=True)  # 一组互斥参数,且至少需要互斥参数中的一个
+
+    group.add_argument('--data_prepare', action="store_true", help="训练集数据预处理")
+
+    group.add_argument('--kb_data_prepare', action="store_true", help="知识库数据预处理")
+    group.add_argument('--task', action="store_true", help="临时组织的任务，调用多个函数")
+    s = 'Hello, Runoob2'
+    print(s)
+    # parse args
+    args = parser.parse_args()
+    #
+    s = 'Hello, Runoob3'
+    print(s)
+    from ckbqa.utils.tools import ProcessManager
+    ProcessManager().run()
+    if args.data_prepare:
+        data_prepare()
+    elif args.kb_data_prepare:
+        kb_data_prepare()
+    elif args.task:
+        task()</code></pre>
+<h4 id="3-1argparse-add-argument"><a href="#3-1argparse-add-argument" class="headerlink" title="3.1argparse.add_argument"></a>3.1argparse.add_argument</h4><p><code>import argparse  # 导入包</code><br><code>parser = argparse.ArgumentParser() # 构造解析器对象</code><br><code>parser.add_argument("echo") # 添加属性</code><br><code>args = parser.parse_args() # 解析参数</code><br><code>print(args.echo) # 获取输入的参数</code></p>
+<p>description - 参数help之前显示的文本（默认值：none） </p>
+<h5 id="add-argument（）方法"><a href="#add-argument（）方法" class="headerlink" title="add_argument（）方法"></a>add_argument（）方法</h5><p><code>ArgumentParser.add_argument(name or flags...[, action][, nargs][, const][, default][, type][, choices][, required][, help][, metavar][, dest])</code></p>
+<ul>
+<li><p>name or flags - 选项字符串的名称或列表，例如foo(位置参数) 或-f, –foo(可选参数) </p>
+</li>
+<li><p><em>action</em> - 在命令行遇到此参数时要采取的基本操作类型:</p>
+</li>
+<li><p>‘store’ - 这只是存储参数的值。这是默认操作</p>
+</li>
+<li><p>store_const’- 它存储const关键字参数指定的值,常用于指定某种标志的可选参数</p>
+</li>
+<li><p><em>‘store_true’和’store_false’</em>-默认参数的值分别False和True</p>
+</li>
+<li><p>‘append’ - 它存储一个列表，并将每个参数值附加到列表中</p>
+</li>
+<li><p>‘append_const’- 它存储一个列表，并将const关键字参数指定的值附加到列表中</p>
+</li>
+<li><p>‘count’ - 这计算关键字参数出现的次数</p>
+</li>
+<li><p><em>‘help’</em> - 这将打印当前解析器中所有选项的完整帮助消息，然后退出。默认情况下，帮助输出中的子解析器组的帮助None</p>
+</li>
+<li><p>‘version’- 这需要调用中version=关键字参数,并打印版本信息并在调用时退出</p>
+</li>
+<li><p>title - 帮助输出中的子解析器组的标题; 默认情况下为“subcommands”（如果提供了description），否则使用title作为位置参数</p>
+</li>
+<li><p>description - 默认情况下，帮助输出中的子解析器组的描述 None</p>
+</li>
+<li><p>prog - 将使用子命令帮助显示的使用信息，默认情况下，程序的名称和subparser参数之前的任何位置参数</p>
+</li>
+<li><p>parser_class - 将用于创建子解析器实例的类，默认情况下是当前解析器的类（例如ArgumentParser）</p>
+</li>
+<li><p>dest - 将存储子命令名称的属性的名称; 默认情况下None，不存储任何值</p>
+</li>
+<li><p>required - 默认情况下是否必须提供子命令 False。</p>
+</li>
+<li><p>metavar - 在帮助中显示可用子命令的字符串; 默认情况下它是，None并以{cmd1，cmd2，..}形式显示子命令</p>
+</li>
+</ul>
  
       <!-- reward -->
       
@@ -222,6 +285,15 @@ True</code></pre>
 
    
   <nav class="article-nav">
+    
+      <a href="/posts/cf9c/" class="article-nav-link">
+        <strong class="article-nav-caption">上一篇</strong>
+        <div class="article-nav-title">
+          
+            ccks-2020
+          
+        </div>
+      </a>
     
     
       <a href="/posts/0/" class="article-nav-link">
@@ -741,11 +813,11 @@ True</code></pre>
             }
           }
         });
-        </script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script><script>
+        </script><script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
 
 </html>
