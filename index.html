@@ -163,6 +163,180 @@
     
     
     <article
+  id="post-位运算之唯一成对的数"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/posts/8253/"
+    >位运算之唯一成对的数</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/posts/8253/" class="article-date">
+  <time datetime="2022-01-04T16:00:08.000Z" itemprop="datePublished">2022-01-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/lanqiao/">lanqiao</a>
+  </div>
+   
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h3 id="找出唯一成对的数"><a href="#找出唯一成对的数" class="headerlink" title="找出唯一成对的数"></a>找出唯一成对的数</h3><p>1-1000这1000个数放在含有1001个元素的数组中，只有唯一的一个元素值重复，其它均只出现一次。每个数组元素只能访问一次，设计一个算法，将它找出来;不用辅助存储空间，能否设计一个算法实现?</p>
+<p><code>※异或：不进位加法</code></p>
+<p>​    <code>性质</code></p>
+<p>​    <code>1、交换律可任意交换运算因子的位置，结果不变</code></p>
+<p>​    <code>2、结合律(即(a^b)^c == a^(b^c))</code></p>
+<p>​    <code>3、对于任何数x，都有x^x=0，x^O=x，同自己求异或为0，同0求异或为自己</code></p>
+<p>​    <code>4、自反性A^B^B=A^0=A，连续和同一个因子做异或运算，最终结果为自己</code></p>
+<h4 id="new-Random-nextInt-n"><a href="#new-Random-nextInt-n" class="headerlink" title="new Random().nextInt(n)"></a>new Random().nextInt(n)</h4><p>​         该方法的作用是生成一个随机的int值，该值介于[0,n)的区间，也就是0到n之间的随机int值，包含0而不包含n。</p>
+<h4 id="读题解代码："><a href="#读题解代码：" class="headerlink" title="读题解代码："></a>读题解代码：</h4><pre><code>import java.util.Random;
+
+
+public class hell {
+    /**
+     * 交换数组中的两个数,一个数自己与自己异或结果为0；一个数与0异或，结果还是自己。
+     */
+    public static void swap(int[] arr, int i, int j) {
+        arr[i] = arr[i] ^ arr[j];
+        arr[j] = arr[i] ^ arr[j];
+        arr[i] = arr[i] ^ arr[j];
+    }
+    public static void main(String[] orgs) {
+        int N=11;//设置数组长度
+        int[] arr = new int[N];//定义长度为N+1的数组
+        for (int i = 0; i &lt; arr.length-1; i++) {
+            arr[i]=i+1;
+        }//初始化N-1的数组
+
+//最后一个数，是随机数
+        arr[arr.length-1]=new Random().nextInt( N-1)+1;//最后一个数为1~N-1随机数
+        int index = new Random().nextInt(N);//随机下标
+        swap(arr,index,arr.length-1);//交换位置
+        for(int i=0;i&lt;=N-1;i++) {
+            System.out.print(" ["+arr[i]+"]");
+        }
+        System.out.println(" ");
+        int x1=0;//任何数和0异或都为其本身
+        for(int i=0;i&lt;=N-1;i++) {
+            x1 = (x1^(i));
+        }//因为已知arr中为[1,N-1]连续整数+一个唯一重复数，arr异或[1,N-1]结果则为那个唯一重复数，该循环的目的是得到[1,N-1]中的各个数异或结果x1
+        for(int i=0;i&lt;=N-1;i++) {
+            x1 = (x1^(arr[i]));
+        }//该循环的目的是将arr数组中的各个数进行连续异或，并将异或结果同x1进行异或
+        System.out.println("该数组的唯一重复数为："+x1);
+    }
+}
+</code></pre>
+<h4 id="解题核心："><a href="#解题核心：" class="headerlink" title="解题核心："></a>解题核心：</h4><p>​    1、已知数串结构为 一组已知连续整数+已知连续整数中的一个数</p>
+<p>​    2、利用A^A=0,A^0=A(同自己求异或为0，同0求异或为自己)</p>
+<p>​    3、自反性A^B^B=A^0=A，连续和同一个因子做异或运算，最终结果为自己</p>
+ 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learn/" rel="tag">learn</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
+  id="post-2021-12-29-note"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
+    
+    <header class="article-header">
+       
+<h2 itemprop="name">
+  <a class="article-title" href="/posts/70e0/"
+    >2021/12/29 note</a> 
+</h2>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/posts/70e0/" class="article-date">
+  <time datetime="2021-12-29T15:11:25.000Z" itemprop="datePublished">2021-12-29</time>
+</a>    
+    </div>
+      
+    <div class="article-entry" itemprop="articleBody">
+       
+  <h1 id="一、重搭载hexo"><a href="#一、重搭载hexo" class="headerlink" title="一、重搭载hexo"></a>一、重搭载hexo</h1><h2 id="1、重新安装软件"><a href="#1、重新安装软件" class="headerlink" title="1、重新安装软件"></a>1、重新安装软件</h2><p>​                nodejs、git、npm</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="D:\file\Work\hexo\source\images\image-20211228154205401.png" alt="image-20211228154205401"></p>
+<h2 id="2、重新配置git"><a href="#2、重新配置git" class="headerlink" title="2、重新配置git"></a>2、重新配置git</h2><p>git config –global user.name “用户名”<br>git config –global user.email ”邮箱“</p>
+<p>ssh-keygen -t rsa -C 邮箱</p>
+<p>生成并获取ssh</p>
+<p>去github上将ssh添加上去<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="D:\file\Work\hexo\image-20211229184753626.png" alt="image-20211229184753626"></p>
+<h2 id="3、重新安装hexo客户端"><a href="#3、重新安装hexo客户端" class="headerlink" title="3、重新安装hexo客户端"></a>3、重新安装hexo客户端</h2><p>npm install hexo-cli -g<br>npm install hexo –save</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="D:\file\Work\hexo\source\images\image-20211228154323711.png" alt="image-20211228154323711"></p>
+<h2 id="4、重新部署"><a href="#4、重新部署" class="headerlink" title="4、重新部署"></a>4、重新部署</h2><p>hexo clean<br>hexo generate<br>hexo deploy</p>
+<h1 id="二、想要学习使用"><a href="#二、想要学习使用" class="headerlink" title="二、想要学习使用"></a>二、想要学习使用</h1><blockquote>
+<p>1、加速博客<br>Github Pages 的服务器在国外, 所以速度其实并不咋地, 所以这里给出优化方案.</p>
+<p>CloudFlare 加速<br>CloudFlare 是一家国外的 CDN 加速服务商. 事实上, 我并不推荐 CloudFlare 对你的博客进行 CDN 加速, 因为 CloudFlare 在国内并没有多少节点, 还很不稳定, 而且挂了 CF 后速度似乎还更慢了些, 所以这里不详细讲解, 想用的自己去了解吧.</p>
+<p>Jsdelivr 加速<br>绝对要推荐这个, 加速利器, 你不需要注册, 甚至连登陆它的网站都不用, 就可以免费使用 Jsdelivr 加速, 简直业界良心啊有木有. Jsdelivr 可以加速 Github 上的静态文件, 很多主题都有配置, 我们这里介绍如何通过 Jsdelivr 引用 Github 资源.<br>　　比如你的 Github 用户名为 yunwanjia-cloud, 你有一个仓库叫 CDN (当然叫别的名字也行, 比如 abc, bcd 啥的), 仓库里有一个文件夹, 名字叫 img, 然后里面有个图片名字叫 abc.jpg, 那么通过 <a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/yunwanjia-cloud/CDN/master/img/abc.jpg">https://raw.githubusercontent.com/yunwanjia-cloud/CDN/master/img/abc.jpg</a> 这个 url 来引用这个图片, 这是通过 Github 来引用. 但是同样的, 你可以通过 Jsdelivr 来引用这个资源, 格式是: <a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/user/repo@version/file">https://cdn.jsdelivr.net/gh/user/repo@version/file</a> , 中间那个 @version 是仓库版本, 我们一般用不上它, 可以不管它. 那么用 Jsdelivr 来引用这个资源就是 <a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/yunwanjia-cloud/CDN/img/abc.jpg">https://cdn.jsdelivr.net/gh/yunwanjia-cloud/CDN/img/abc.jpg</a> . 用法很简单, 效果很强大. 可以简单对比一下两个的加载速度就知道加速有多么显著<br><a target="_blank" rel="noopener" href="https://raw.githubusercontent.com/yunwanjia-cloud/yunwanjia-cloud.github.io/master/img/banner/0.jpg">https://raw.githubusercontent.com/yunwanjia-cloud/yunwanjia-cloud.github.io/master/img/banner/0.jpg</a><br>这是 Gighub<br><a target="_blank" rel="noopener" href="https://cdn.jsdelivr.net/gh/yunwanjia-cloud/yunwanjia-cloud.github.io/img/banner/0.jpg">https://cdn.jsdelivr.net/gh/yunwanjia-cloud/yunwanjia-cloud.github.io/img/banner/0.jpg</a><br>这是 Jsdelivr</p>
+<p>图床<br>相信很多人都有使用图床的经历, 在文章中直接引用外链也能显著的加速, 但是上面已经介绍了 Jsdelivr 加速了, 所有图片都可以通过 Jsdelivr 加速, 已经没有使用图床的必要了. 但是还是有人想用图床, 那么这里介绍一种发生, 搭建自己的图床. 利用的原理还是 Jsdelivr 加速, 即将 Github 当成图床, 然后通过 Jsdelivr 引用. 这里利用了一个方便的工具 Picgo, 它可以方便的上传图片到 Github (但是经常出错, 非常玄学, 时灵时不灵, 经过本人测试, 只有 2.0.4 这个版本勉强能用, 但还是经常出错, 反正就是玄学).</p>
+<p>网页预加载脚本 instant.page<br>这个脚本可以实现页面的预加载, 将用户想要访问的页面缓存下来, 需要时直接从缓存读取.</p>
+<p>Butterfly 自带该脚本, 因此如果使用 Butterfly 主题可以不用配置.<br>特性<br>在用户点击网站链接之前, 他们将鼠标悬停在该链接上. 当用户徘徊 65 毫秒时, 他们将点击该链接有两个机会, 因此 instant.page 此时开始预加载, 平均超过 300 毫秒, 以便页面预加载.<br>instant.page 是渐进式增强 - 对不支持它的浏览器没有影响.<br>instant.page 对站内访问速度的提升的确很给力。然而它只会预加载自己的站内链接，而不会预加载其他外链。<br>使用方法<br>将这段代码放到主题目录下的 layout/includes/layout.ejs 文件中的  标签前就可以了.</p>
+<script src="https://cdn.jsdelivr.net/gh/yunwanjia-cloud/yunwanjia-cloud.github.io/js/instant_page.js" type="module"></ script>
+1
+当然, 同样也有 layout/includes/layout.pug 的情况 (同样比如 Butterfly), 那么可以将以下代码放到 head 前
+script(
+  src="https://cdn.jsdelivr.net/gh/yunwanjia-cloud/yunwanjia-cloud.github.io/js/instant_page.js"
+  type="module"
+  )
+版权声明：本文为CSDN博主「云玩家-cloud」的原创文章，遵循CC 4.0 BY-SA版权协议，转载请附上原文出处链接及本声明。
+原文链接：https://blog.csdn.net/qq_42579187/article/details/104760516</blockquote>
+</script></blockquote> 
+      <!-- reward -->
+      
+    </div>
+    
+
+    <!-- copyright -->
+    
+    <footer class="article-footer">
+       
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Record-daily/" rel="tag">Record daily</a></li></ul>
+
+    </footer>
+  </div>
+
+    
+ 
+    
+</article>
+
+    
+    <article
   id="post-hello-world"
   class="article article-type-post"
   itemscope
@@ -760,106 +934,6 @@
 </article>
 
     
-    <article
-  id="post-reduce-maven-s-version"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/posts/d774/"
-    >reduce maven&#39;s version</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/posts/d774/" class="article-date">
-  <time datetime="2021-03-29T12:52:16.000Z" itemprop="datePublished">2021-03-29</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-   
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
-    <article
-  id="post-javaEE-environment"
-  class="article article-type-post"
-  itemscope
-  itemprop="blogPost"
-  data-scroll-reveal
->
-  <div class="article-inner">
-    
-    <header class="article-header">
-       
-<h2 itemprop="name">
-  <a class="article-title" href="/posts/18e3/"
-    >javaEE environment</a> 
-</h2>
- 
-
-    </header>
-     
-    <div class="article-meta">
-      <a href="/posts/18e3/" class="article-date">
-  <time datetime="2021-03-01T01:56:44.000Z" itemprop="datePublished">2021-03-01</time>
-</a>    
-    </div>
-      
-    <div class="article-entry" itemprop="articleBody">
-       
-  <p>1 工具安装√</p>
-<ul>
-<li><p>（代码管理工具）下载git，在本地安装（代码管理工具）</p></li></ul> 
-      <a class="article-more-link" href="/posts/18e3/"
-        >阅读更多...</a
-      >
-       
-      <!-- reward -->
-      
-    </div>
-    
-
-    <!-- copyright -->
-    
-    <footer class="article-footer">
-       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/memoir/" rel="tag">memoir</a></li></ul>
-
-    </footer>
-  </div>
-
-    
- 
-    
-</article>
-
-    
   </article>
   
 
@@ -877,7 +951,7 @@
     <ul>
       <li>
         Copyrights &copy;
-        2021
+        2021-2022
         <i class="ri-heart-fill heart_icon"></i> 抡着云就蹿的渺畔
       </li>
     </ul>
@@ -1266,11 +1340,11 @@
             }
           }
         });
-        </script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script><script>
+        </script><script>
             window.imageLazyLoadSetting = {
                 isSPA: false,
                 processImages: null,
             };
-        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script></body>
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(n){n.imageLazyLoadSetting.processImages=i;var e=n.imageLazyLoadSetting.isSPA,r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]"));function i(){e&&(r=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")));for(var t,a=0;a<r.length;a++)0<=(t=(t=r[a]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(n.innerHeight||document.documentElement.clientHeight)&&function(){var t,e,n,i,o=r[a];t=o,e=function(){r=r.filter(function(t){return o!==t})},n=new Image,i=t.getAttribute("data-original"),n.onload=function(){t.src=i,e&&e()},n.src=i}()}i(),n.addEventListener("scroll",function(){var t,e;t=i,e=n,clearTimeout(t.tId),t.tId=setTimeout(function(){t.call(e)},500)})}(this);</script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"scale":1,"hHeadPos":0.5,"vHeadPos":0.618,"jsonPath":"/live2dw/assets/assets/koharu.model.json"},"display":{"superSample":2,"width":150,"height":300,"position":"right","hOffset":0,"vOffset":-20},"mobile":{"show":true,"scale":0.5},"react":{"opacityDefault":0.7,"opacityOnHover":0.8},"log":false});</script></body>
 
 </html>

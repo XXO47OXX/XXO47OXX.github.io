@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    归档 |  The light will fade, the time as come
+    位运算之唯一成对的数 |  The light will fade, the time as come
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -50,157 +50,293 @@
       
     <main class="content on">
       <section class="outer">
-  
-  <ul class="ads">
+  <article
+  id="post-位运算之唯一成对的数"
+  class="article article-type-post"
+  itemscope
+  itemprop="blogPost"
+  data-scroll-reveal
+>
+  <div class="article-inner">
     
-        <li>
-            <a href="">
-                <img src="" width="" alt="">
-            </a>
-        </li>
-    
-        <li>
-            <a href="">
-                <img src="" width="" alt="">
-            </a>
-        </li>
-    
-</ul>
+    <header class="article-header">
+       
+<h1 class="article-title sea-center" style="border-left:0" itemprop="name">
+  位运算之唯一成对的数
+</h1>
+ 
+
+    </header>
+     
+    <div class="article-meta">
+      <a href="/posts/8253/" class="article-date">
+  <time datetime="2022-01-04T16:00:08.000Z" itemprop="datePublished">2022-01-05</time>
+</a> 
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/lanqiao/">lanqiao</a>
+  </div>
   
-  
-  <article class="articles">
-    
-    
-    <h1 class="page-type-title">归档</h1>
-    
-    
-  
-  
-  
-  
-  
-  
-  <div class="archives-wrap">
-    <div class="archive-year-wrap">
-      <a href="/archives/2021" class="archive-year">2021</a>
+<div class="word_count">
+    <span class="post-time">
+        <span class="post-meta-item-icon">
+            <i class="ri-quill-pen-line"></i>
+            <span class="post-meta-item-text"> 字数统计:</span>
+            <span class="post-count">663</span>
+        </span>
+    </span>
+
+    <span class="post-time">
+        &nbsp; | &nbsp;
+        <span class="post-meta-item-icon">
+            <i class="ri-book-open-line"></i>
+            <span class="post-meta-item-text"> 阅读时长≈</span>
+            <span class="post-count">2 分钟</span>
+        </span>
+    </span>
+</div>
+ 
     </div>
-    <div class="archives">
       
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/posts/d774/" class="archive-article-date">
-  <time datetime="2021-03-29T12:52:16.000Z" itemprop="datePublished">03/29</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/posts/d774/"
-    >reduce maven&#39;s version</a> 
-</h2>
- 
+    <div class="tocbot"></div>
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/posts/18e3/" class="archive-article-date">
-  <time datetime="2021-03-01T01:56:44.000Z" itemprop="datePublished">03/01</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/posts/18e3/"
-    >javaEE environment</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/posts/da69/" class="archive-article-date">
-  <time datetime="2021-01-10T14:36:45.000Z" itemprop="datePublished">01/10</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/posts/da69/"
-    >markerdown-learning</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
-  
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/posts/eee9/" class="archive-article-date">
-  <time datetime="2021-01-10T13:22:59.000Z" itemprop="datePublished">01/10</time>
-</a>
-       
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/posts/eee9/"
-    >‘基本环境配置记录’</a> 
-</h2>
- 
 
-    </header>
-    
-    
-  </div>
-</article>
-      
   
-  
-      <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      <a href="/posts/3f14/" class="archive-article-date">
-  <time datetime="2021-01-08T12:06:15.000Z" itemprop="datePublished">01/08</time>
-</a>
+    <div class="article-entry" itemprop="articleBody">
        
-<h2 itemprop="name">
-  <a class="archive-article-title" href="/posts/3f14/"
-    >Store inventory management system</a> 
-</h2>
- 
+  <h3 id="找出唯一成对的数"><a href="#找出唯一成对的数" class="headerlink" title="找出唯一成对的数"></a>找出唯一成对的数</h3><p>1-1000这1000个数放在含有1001个元素的数组中，只有唯一的一个元素值重复，其它均只出现一次。每个数组元素只能访问一次，设计一个算法，将它找出来;不用辅助存储空间，能否设计一个算法实现?</p>
+<p><code>※异或：不进位加法</code></p>
+<p>​    <code>性质</code></p>
+<p>​    <code>1、交换律可任意交换运算因子的位置，结果不变</code></p>
+<p>​    <code>2、结合律(即(a^b)^c == a^(b^c))</code></p>
+<p>​    <code>3、对于任何数x，都有x^x=0，x^O=x，同自己求异或为0，同0求异或为自己</code></p>
+<p>​    <code>4、自反性A^B^B=A^0=A，连续和同一个因子做异或运算，最终结果为自己</code></p>
+<h4 id="new-Random-nextInt-n"><a href="#new-Random-nextInt-n" class="headerlink" title="new Random().nextInt(n)"></a>new Random().nextInt(n)</h4><p>​         该方法的作用是生成一个随机的int值，该值介于[0,n)的区间，也就是0到n之间的随机int值，包含0而不包含n。</p>
+<h4 id="读题解代码："><a href="#读题解代码：" class="headerlink" title="读题解代码："></a>读题解代码：</h4><pre><code>import java.util.Random;
 
-    </header>
-    
-    
-  </div>
-</article>
-      
+
+public class hell {
+    /**
+     * 交换数组中的两个数,一个数自己与自己异或结果为0；一个数与0异或，结果还是自己。
+     */
+    public static void swap(int[] arr, int i, int j) {
+        arr[i] = arr[i] ^ arr[j];
+        arr[j] = arr[i] ^ arr[j];
+        arr[i] = arr[i] ^ arr[j];
+    }
+    public static void main(String[] orgs) {
+        int N=11;//设置数组长度
+        int[] arr = new int[N];//定义长度为N+1的数组
+        for (int i = 0; i &lt; arr.length-1; i++) {
+            arr[i]=i+1;
+        }//初始化N-1的数组
+
+//最后一个数，是随机数
+        arr[arr.length-1]=new Random().nextInt( N-1)+1;//最后一个数为1~N-1随机数
+        int index = new Random().nextInt(N);//随机下标
+        swap(arr,index,arr.length-1);//交换位置
+        for(int i=0;i&lt;=N-1;i++) {
+            System.out.print(" ["+arr[i]+"]");
+        }
+        System.out.println(" ");
+        int x1=0;//任何数和0异或都为其本身
+        for(int i=0;i&lt;=N-1;i++) {
+            x1 = (x1^(i));
+        }//因为已知arr中为[1,N-1]连续整数+一个唯一重复数，arr异或[1,N-1]结果则为那个唯一重复数，该循环的目的是得到[1,N-1]中的各个数异或结果x1
+        for(int i=0;i&lt;=N-1;i++) {
+            x1 = (x1^(arr[i]));
+        }//该循环的目的是将arr数组中的各个数进行连续异或，并将异或结果同x1进行异或
+        System.out.println("该数组的唯一重复数为："+x1);
+    }
+}
+</code></pre>
+<h4 id="解题核心："><a href="#解题核心：" class="headerlink" title="解题核心："></a>解题核心：</h4><p>​    1、已知数串结构为 一组已知连续整数+已知连续整数中的一个数</p>
+<p>​    2、利用A^A=0,A^0=A(同自己求异或为0，同0求异或为自己)</p>
+<p>​    3、自反性A^B^B=A^0=A，连续和同一个因子做异或运算，最终结果为自己</p>
+ 
+      <!-- reward -->
       
     </div>
-  </div>
-  
-  
-
-  
-  <nav class="page-nav">
     
-    <a class="extend prev" rel="prev" href="/archives/">上一页</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
+
+    <!-- copyright -->
+    
+    <div class="declare">
+      <ul class="post-copyright">
+        <li>
+          <i class="ri-copyright-line"></i>
+          <strong>版权声明： </strong>
+          
+          本博客所有文章除特别声明外，著作权归作者所有。转载请注明出处！
+          
+        </li>
+      </ul>
+    </div>
+    
+    <footer class="article-footer">
+       
+<div class="share-btn">
+      <span class="share-sns share-outer">
+        <i class="ri-share-forward-line"></i>
+        分享
+      </span>
+      <div class="share-wrap">
+        <i class="arrow"></i>
+        <div class="share-icons">
+          
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="ri-weibo-fill"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="ri-wechat-fill"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="ri-qq-fill"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="ri-douban-line"></i>
+          </a>
+          <!-- <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a> -->
+          
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="ri-facebook-circle-fill"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="ri-twitter-fill"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="ri-google-fill"></i>
+          </a>
+        </div>
+      </div>
+</div>
+
+<div class="wx-share-modal">
+    <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://xxo47oxx.github.io/posts/8253/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div id="share-mask"></div>  
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/learn/" rel="tag">learn</a></li></ul>
+
+    </footer>
+  </div>
+
+   
+  <nav class="article-nav">
+    
+    
+      <a href="/posts/70e0/" class="article-nav-link">
+        <strong class="article-nav-caption">下一篇</strong>
+        <div class="article-nav-title">2021/12/29 note</div>
+      </a>
+    
   </nav>
-  
+
+   
+<!-- valine评论 -->
+<div id="vcomments-box">
+    <div id="vcomments">
+    </div>
+</div>
+<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+<!-- <script src='https://cdn.jsdelivr.net/npm/valine@1.3.10/dist/Valine.min.js'></script> -->
+<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
+<!-- 评论背景 -->                                                         
+<style>
+    #veditor{min-height: 10rem;
+        background-image: url(https://gitee.com/cungudafa/source/raw/master/img/gif/katon/pinkcoolpig.gif);
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        background-color: rgba(255,255,255,0);
+        resize: none;}
+</style>
+<!-- Valine配置 --> 
+<script>
+    new Valine({
+        el: '#vcomments',
+        enableQQ: true,
+        app_id: 'SEOMqhB2pQ95cENmL2EDoUfA-gzGzoHsz',
+        app_key: 'LKSHaH1ClesomwMoJ7HOdujK',
+        path: window.location.pathname,
+        //notify: '',
+        //verify: '',
+        avatar: 'robohash',
+        placeholder: '给我的文章加点评论吧~',
+        recordIP: true,
+        
+        // 设置Bilibili表情包地址
+        emojiCDN: 'https://cdn.jsdelivr.net/gh/XXXZhy/Blog_Image/valine_emoticon/', 
+        // 表情title和图片映射
+        emojiMaps: {
+                "墙角滑稽": "害怕滑稽.gif",
+                "仙女下凡": "仙女下凡.webp",
+                "听歌": "听歌.webp",
+                "嫌弃": "嫌弃.webp",
+                "害羞": "害羞.webp",
+                "彩虹滑稽": "彩虹滑稽.webp",
+                "快走": "快走.webp",
+                "扯脸": "扯脸.webp",
+                "摸脸": "摸脸.webp",
+                "流汗": "流汗.webp",
+                "滑滑板": "滑滑板.webp",
+                "点赞": "点赞.webp",
+                "转圈圈": "转圈圈.webp",
+                // ... 更多表情
+        } 	
+    });
+    const infoEle = document.querySelector('#vcomments .info');
+    if (infoEle && infoEle.childNodes && infoEle.childNodes.length > 0) {
+        infoEle.childNodes.forEach(function (item) {
+            item.parentNode.removeChild(item);
+        });
+    }
+</script>
+<script type="text/javascript">
+   fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("veditor").setAttribute("placeholder",data.hitokoto+"__"+data.from);
+    })
+    .catch(console.error)
+</script>
+
+<style>
+    #vcomments-box {
+        padding: 5px 30px;
+    }
+
+    @media screen and (max-width: 800px) {
+        #vcomments-box {
+            padding: 5px 0px;
+        }
+    }
+
+    #vcomments-box #vcomments {
+        background-color: #fff;
+    }
+
+    .v .vlist .vcard .vh {
+        padding-right: 20px;
+    }
+
+    .v .vlist .vcard {
+        padding-left: 10px;
+    }
+</style>
+
+ 
+   
+     
+</article>
+
 </section>
       <footer class="footer">
   <div class="outer">
@@ -369,6 +505,23 @@
 <script src="/js/lazyload.min.js"></script>
 
 <!-- Tocbot -->
+
+
+<script src="/js/tocbot.min.js"></script>
+
+<script>
+  tocbot.init({
+    tocSelector: '.tocbot',
+    contentSelector: '.article-entry',
+    headingSelector: 'h1, h2, h3, h4, h5, h6',
+    hasInnerContainers: true,
+    scrollSmooth: true,
+    scrollContainer: 'main',
+    positionFixedSelector: '.tocbot',
+    positionFixedClass: 'is-position-fixed',
+    fixedSidebarOffset: 'auto'
+  });
+</script>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.js"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/jquery-modal@0.9.2/jquery.modal.min.css">
