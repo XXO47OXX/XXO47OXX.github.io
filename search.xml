@@ -1550,4 +1550,191 @@ return (ou &gt;&gt;&gt; 1) ^ (ji &lt;&lt;  1); // 连起来   }
         <tag>learn</tag>
       </tags>
   </entry>
+  <entry>
+    <title></title>
+    <url>/posts/0/</url>
+    <content><![CDATA[<h1 id="一、-分治法介绍及关键点解析"><a href="#一、-分治法介绍及关键点解析" class="headerlink" title="*一、**分治法介绍及关键点解析*"></a><em><strong>*一、*</strong></em><em><strong>*分治法介绍及关键点解析*</strong></em></h1><p>一、分治思想：快速排序、归并排序</p>
+<p>1．分治法（为了解决问题 和提高效率）</p>
+<p>（1）分治法(divide and conquer,D&amp;C)∶<br>将原问题划分成若干个规模较小而结构与原问题一致的子问题;递归地解决这些子问题，然后再合并其结果，就得到原问题的解。</p>
+<p>（2）容易确定运行时间，是分治算法的优点之一。</p>
+<p>（3）分治模式在每一层递归上都有三个步骤</p>
+<p>① 分解(Divide):将原问题分解成一系列子问题;</p>
+<p>② 解决(Conquer):递归地解各子问题。若子问题足够小,则直接有解</p>
+<p>③ 合并(combine):将子问题的结果合并成原问题的解。</p>
+<p>2．分治的关键点</p>
+<p>（1）原问题可以一直分解为形式相同子问题，当子问题规模较小时，可自然求解，如一个元素本身有序</p>
+<p>（2）子问题的解通过合并可以得到原问题的解</p>
+<p>（3）子问题的分解以及解的合并一定是比较简单的，否则分解和合并所花的时间可能超出暴力解法，得不偿失</p>
+<p>3．快速排序算法</p>
+<p>（1）快速排序算法</p>
+<p>① 分解:数组A[p..r]被划分为两个子数组A[p..q-1]和A[q+1,r]，使得A[ q]为大小居中的数，左侧A[p..q-1]中的每个元素都小于等于它，而右侧A [q+1,r]中的每个元素都大于等于它。其中计算下标q也是划分过程的一部分。</p>
+<p>② 解决:通过递归调用快速排序，对子数组A[p..q-1]和A[ q+1,r]进行排序</p>
+<p>③ 合并:因为子数组都是原址排序的，所以不需要合并，数组A[p..r]已经有序</p>
+<p>（2）那么，划分就是问题的关键</p>
+<pre><code>QuickSort(A,p,r)
+
+if p&lt;r
+
+q=Partition(A,p,r)//得到中间数
+
+QuickSort(A,p,q-1)
+
+QuickSort(A,q+1,r)
+</code></pre>
+<p>（3）快排的划分算法</p>
+<p>① 一遍单向扫描法</p>
+<p>思路：用两个指针将数组划分为三个区间</p>
+<p>扫描指针（scan_pos)左边是确认小于主元的</p>
+<p>扫描指针到某个指针（next_bigger_pos)中间为未知的,因此我们将第二个指针（next_bigger_pos）成为未知区间末指针，末指针的右边为确认大于主元的</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>scan_pos</th>
+<th></th>
+<th></th>
+<th>next_bigger_pos</th>
+</tr>
+</thead>
+<tbody><tr>
+<td></td>
+<td>？</td>
+<td>……</td>
+<td>……</td>
+<td>？</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+<pre><code> int partition(int A[],int p,int r)
+{
+    int pivot=A[p];
+    int sp=p+1;//扫描指针
+    int bigger=r;//右侧指针
+    while(sp&lt;=bigger)
+    {
+        if(A[sp]&lt;=pivot)//扫描元素小于主元，左指针向右移
+            sp++;
+        else
+        {
+            swap(A,sp,bigger);//扫描元素大于主元，二指针元素交换，右指针向左移
+            bigger--;
+        }
+
+    }
+    swap(A,p,bigger);
+    return bigger;
+
+}
+</code></pre>
+<p>② 双向扫描法</p>
+<p>\1. 思路：头尾指针往中间扫描，从左找到大于等于主元的元素，从右找到小于等于主元的元素二者交换，继续扫描，知道左侧无大元素，右侧无小元素</p>
+<pre><code>int partition2(int A[],int p,int r)
+
+{
+
+  int pivot=A[p];
+
+  int left=p+1;//扫描指针
+
+  int right=r;//右侧指针
+
+  while(left&lt;=right)
+
+  {
+
+​    //left不停往右走，直到遇到大于主元的元素
+
+​    while(A[left]&lt;=pivot&amp;&amp;left&lt;=right)
+
+​      left++;//循环退出时，left一定指向第一个大于主元的位置
+
+​    while(A[right]&gt;pivot&amp;&amp;left&lt;=right)
+
+​      right--;//循环退出时right一定指向最后一个小于等于主元的位置
+
+​    if(left&lt;right)swap(A,left,right);
+
+  }
+
+  //while退出时，两者交错，是right指向最后一个小于等于主元的位置，也就是主元应该呆的位置
+
+  swap(A,p,right);
+
+  return right;
+
+}
+</code></pre>
+<p>③ 三分法—-有相同元素值的快速排序</p>
+<p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsCAMAAABOo35HAAAABGdBTUEAAK/INwWK6QAAABl0RVh0U29mdHdhcmUAQWRvYmUgSW1hZ2VSZWFkeXHJZTwAAAC9UExURVlZWdPT07KysmRkZIWFhfT09JmZmWZmZm9vb39/fxkZGUxMTDMzM3p6epCQkKamppubm729venp6cjIyN7e3tbW1s/Pz8LCwnx8fLS0tFZWVoiIiI+Pj6GhoeTk5Glpabu7u93d3evr66CgoJSUlKqqqsnJyeDg4Hd3d8PDw+Xl5bi4uNHR0dvb26Ojo6urq+fn51hYWDg4OCgoKHBwcK2traenp0FBQe7u7vHx8U5OTre3t8zMzHV1df///7GrnpQAAAA/dFJOU///////////////////////////////////////////////////////////////////////////////////AI4mfBcAAAUGSURBVHja7NoJb6M4GMZxY0NCD64kve/pMZ2d3Z297+X7f6zFNmBAMUXa6URl/q9UJSWPUPzrizFWRUlNLgEBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYYIEFAVhggQUWWGBBABZYYIEFFlgQgAUWWGCBBRYEYIEFFlhggQUBWGCBBRZYYEEAFlhggQUWWBCABRZYYIEFFgRggQUWWGCBBQFYYIEFFlhgQQAWWGCBBRZYEIAFFlhggQUWBGCBBRZYn6cCIcRXgvX/h9qcIVBqDdbEM8RCxGCB9QqXYRwHYDHBgwXWl8eKZKiESHI3Ba1kWs3fKixcaJUl1YyeBm7Ocq+yLItUiVBGnXxenSHJolIKEcwHq6ikbOX1YGVzQCTN8LPmSLreghUl9sN4Uw7yajMrLC0TZ1ImzqY6FEop0+pIaEN5HaoOxVuwEqFyc4I46uSlzOLqgxlh6UaR9l3VYWl9Fdoxb1Q90KJtu41pwwFW/WHhTtW8i7TafLCqRsk6bsGw63L9qurXRmuIlbT9lDQnlXU+nBFW1Q2qnZbDprWa2tjR90LZFqx1/+Td/HpGWLlrLDvIwTcx6dQ1Vrntbig68cDms3JwbA5Y1azs1ger6sNV/bbIw1jU81MvNAGrl58RVn8ozW+btF08iGFoAlYvP3csfVur1gJBEIA1uBmue5dhZDOyO2epbmgCVi8/I6x0MMHH9pjsTfBhNzQBq5uPZoQlB0uH3DZG4EZqQ26fL3sZq5uf09Ih6qw3i/pm6BZO0qZX7rrUS68Xsbr5ZE4rePMk08pk9aUZugfqppvs6AM1Acvlo/StP+6EbW06z8hJqxbYp2BZPQUnFsLsKuhQdaHqn5ewbF7KXIn0jWO5MqOQ7RaNLPtbNMmmhimj0GUmYLl8Gs0Lq4wyPbTu1l2QKqHSouzs3OlDIslW5SQsnY/NXmFplyNvEuuLV/Tau9BzwiraDUSwXmysztYWWNtL1psXeumgIrDGaqXvBfUuvtqUYI3V2t1wk1e2msFluJJm6zDJXv/fIfjPP7DAAgsssCiwwAILLLDAosACCyywwAKLAgsssMACC6zt9fDz/v75tyOB+98PD2+ORgKffjw4OP1uJPDxl+Xy8v1I4MPF3t7VNyOB4/vF4uzdzrG+39f1kz/w66Guv/yBvw90KX/gZKkr8Qf+2dOV+gNHC12/7RxrabD2/a31bLAO/a11YbAO/K21MFhLf2s9Gqw9f2vdGqzFu11jnVusE2/gxmI9eQOnFuvYG7i0WH7uK4t15w2cWazrXWP9a7H8f/bQYvm/6IPF+sF/pVssf19Ii/WH/0K2WH/uGuvEWC39gSdj9Twy+Rqri5EZx1gt/IE7Y/XoD1wbq9vd3w1PlufnD2OBp+ebm/uxwPHF6emnscDR4vLy41jg7vHq6sNY4Pr27OyYdRaLUrDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssMCiwAILLLDAAosCCyywwAILLAossMACCyywKLDAAgsssL6u+k+AAQCR9eHtLKvLfwAAAABJRU5ErkJggg==" data-original="D:\file\Work\hexo\source\images\sanzhizhen.png" alt="img"> </p>
+<p>1）小于主元，s位置同e位置交换，s++，e++</p>
+<p>2）等于主元，s++</p>
+<p>3）大于主元，s位置同e位置交换，bigger–</p>
+<pre><code>int partition3(int A[],int p,int r)
+
+{
+
+  int pivot=A[p];
+
+  int s=p+1;//扫描指针
+
+  int e=p+1;//扫描指针
+
+  int bigger=r;//右侧指针
+
+  while(s&lt;=bigger)
+
+  {
+
+​    if(A[s]&lt;pivot)//扫描元素小于主元，交换s,e,s指针、e指针向右移
+
+​    {
+
+​      swap(A,s,e);
+
+​      s++;
+
+​      e++;
+
+​    }
+
+​    else if(A[s]==pivot)//扫描元素等于于主元，左指针向右移
+
+​    {
+
+​      s++;
+
+​    }
+
+​    else if(A[s]&gt;pivot)
+
+​    {
+
+​      swap(A,s,bigger);//扫描元素大于主元，二指针元素交换，右指针向左移
+
+​      bigger--;
+
+​    }
+
+  }
+
+  e--;
+
+  swap(A,p,e);//print(A,10);cout&lt;&lt;bigger&lt;&lt;endl;
+
+  return bigger;
+
+}
+</code></pre>
+<p>\1. 小和、逆序对等问题的求解</p>
+<p>\2. 空间结构之法：堆排序、计数排序等</p>
+<p>\3. 排序算法小结</p>
+<p>\4. 题解</p>
+]]></content>
+  </entry>
 </search>
