@@ -11,7 +11,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
   <title>
-    位运算之唯一成对的数 |  The light will fade, the time as come
+    ALGO-967 共线 |  The light will fade, the time as come
   </title>
   <meta name="generator" content="hexo-theme-ayer">
   
@@ -51,7 +51,7 @@
     <main class="content on">
       <section class="outer">
   <article
-  id="post-位运算之唯一成对的数"
+  id="post-ALGO-967-共线"
   class="article article-type-post"
   itemscope
   itemprop="blogPost"
@@ -62,15 +62,15 @@
     <header class="article-header">
        
 <h1 class="article-title sea-center" style="border-left:0" itemprop="name">
-  位运算之唯一成对的数
+  ALGO-967 共线
 </h1>
  
 
     </header>
      
     <div class="article-meta">
-      <a href="/posts/8253/" class="article-date">
-  <time datetime="2022-01-04T16:00:08.000Z" itemprop="datePublished">2022-01-05</time>
+      <a href="/posts/d0e/" class="article-date">
+  <time datetime="2022-01-23T12:04:00.000Z" itemprop="datePublished">2022-01-23</time>
 </a> 
   <div class="article-category">
     <a class="article-category-link" href="/categories/lanqiao/">lanqiao</a>
@@ -81,7 +81,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-quill-pen-line"></i>
             <span class="post-meta-item-text"> 字数统计:</span>
-            <span class="post-count">663</span>
+            <span class="post-count">826</span>
         </span>
     </span>
 
@@ -90,7 +90,7 @@
         <span class="post-meta-item-icon">
             <i class="ri-book-open-line"></i>
             <span class="post-meta-item-text"> 阅读时长≈</span>
-            <span class="post-count">2 分钟</span>
+            <span class="post-count">3 分钟</span>
         </span>
     </span>
 </div>
@@ -105,55 +105,80 @@
   
     <div class="article-entry" itemprop="articleBody">
        
-  <h3 id="找出唯一成对的数"><a href="#找出唯一成对的数" class="headerlink" title="找出唯一成对的数"></a>找出唯一成对的数</h3><p>1-1000这1000个数放在含有1001个元素的数组中，只有唯一的一个元素值重复，其它均只出现一次。每个数组元素只能访问一次，设计一个算法，将它找出来;不用辅助存储空间，能否设计一个算法实现?</p>
-<p><code>※异或：不进位加法</code></p>
-<p>​    <code>性质</code></p>
-<p>​    <code>1、交换律可任意交换运算因子的位置，结果不变</code></p>
-<p>​    <code>2、结合律(即(a^b)^c == a^(b^c))</code></p>
-<p>​    <code>3、对于任何数x，都有x^x=0，x^O=x，同自己求异或为0，同0求异或为自己</code></p>
-<p>​    <code>4、自反性A^B^B=A^0=A，连续和同一个因子做异或运算，最终结果为自己</code></p>
-<h4 id="new-Random-nextInt-n"><a href="#new-Random-nextInt-n" class="headerlink" title="new Random().nextInt(n)"></a>new Random().nextInt(n)</h4><p>​         该方法的作用是生成一个随机的int值，该值介于[0,n)的区间，也就是0到n之间的随机int值，包含0而不包含n。</p>
-<h4 id="读题解代码："><a href="#读题解代码：" class="headerlink" title="读题解代码："></a>读题解代码：</h4><pre><code>import java.util.Random;
-
-
-public class hell {
-    /**
-     * 交换数组中的两个数,一个数自己与自己异或结果为0；一个数与0异或，结果还是自己。
-     */
-    public static void swap(int[] arr, int i, int j) {
-        arr[i] = arr[i] ^ arr[j];
-        arr[j] = arr[i] ^ arr[j];
-        arr[i] = arr[i] ^ arr[j];
-    }
-    public static void main(String[] orgs) {
-        int N=11;//设置数组长度
-        int[] arr = new int[N];//定义长度为N+1的数组
-        for (int i = 0; i &lt; arr.length-1; i++) {
-            arr[i]=i+1;
-        }//初始化N-1的数组
-
-//最后一个数，是随机数
-        arr[arr.length-1]=new Random().nextInt( N-1)+1;//最后一个数为1~N-1随机数
-        int index = new Random().nextInt(N);//随机下标
-        swap(arr,index,arr.length-1);//交换位置
-        for(int i=0;i&lt;=N-1;i++) {
-            System.out.print(" ["+arr[i]+"]");
+  <p>关键词：排序</p>
+<h2 id="试题-算法训练-共线"><a href="#试题-算法训练-共线" class="headerlink" title="试题 算法训练 共线"></a>试题 算法训练 共线</h2><p><a target="_blank" rel="noopener" href="http://lx.lanqiao.cn/problem.page?gpid=T2668#submitpanel">题目链接</a></p>
+<p>资源限制</p>
+<p>时间限制：1.0s  内存限制：256.0MB</p>
+<p>问题描述</p>
+<p>　　给定2维平面上n个整点的坐标，一条直线最多能过几个点？</p>
+<p>输入格式</p>
+<p>　　第一行一个整数n表示点的个数<br>　　以下n行，每行2个整数分别表示每个点的x,y坐标。</p>
+<p>输出格式</p>
+<p>　　输出一个整数表示答案。</p>
+<p>样例输入</p>
+<p>5<br>0 0<br>1 1<br>2 2<br>0 3<br>2 3</p>
+<p>样例输出</p>
+<p>3</p>
+<p>数据规模和约定</p>
+<p>　　n&lt;=1500，数据保证不会存在2个相同的点。<br>　　点坐标在int范围内</p>
+<h3 id="问题分析"><a href="#问题分析" class="headerlink" title="问题分析"></a>问题分析</h3><p>1、直线的斜率的取值范围是:-∞&lt;k&lt;+∞,斜率k可以是一切实数,k∈R</p>
+<p>2、两点确定一条直线</p>
+<p>3、题目所求的是“一条直线上最多的点”，那么这条直线上最少会有两个点，反向思考→一个点在拥有最多点的直线上，那么它就会拥有许多和其它点相同的斜率。也就是说，在一个点所拥有的最高频次的斜率即为，题目所求的解。</p>
+<p>4、如要存储斜率信息，需要考虑到斜率不存在的情况，即，点落在横轴上</p>
+<h3 id="算法设计"><a href="#算法设计" class="headerlink" title="算法设计"></a>算法设计</h3><p>1、先用二维数组存储坐标信息，point [i] [0]存储x坐标，point [i] [2]存储y坐标。第一个双重for循环录入坐标信息。</p>
+<p>2、第二个双重for循环，计算每个点与其它点所连成的直线的斜率，并计算每个斜率的频次。此处设置一个整型数other来记录斜率不存在的情况。</p>
+<p>3、每计算一个point[i]和point[j]的斜率，则将数据存储至point[j] [2]中，并用point[j] [3]记录其数据出现频次，每记录一个频次A，就往前找是否有重复值B出现，并对两者的频次进行相加，即A+B。</p>
+<p>4、确定频次后及时同max进行比较记录最大值。</p>
+<p>5、确定最大值后，可用if（max&gt;n-i-1）判断是否提前结束计算。因为每计算过一轮i值，i值对应的那个点C与C对应的所以斜率都已无意义，可以进行数据覆盖，且不再参与计算。当max大于下一轮斜率数，答案就是当前的max值。</p>
+<h3 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h3><pre><code>#include &lt;iostream&gt;
+using namespace std;
+int main()
+{
+    int n;
+    cin&gt;&gt;n;
+    int max=1;
+    double point[1500][4]= {0};
+    for(int i=0; i&lt;n; i++)
+    {
+        cin&gt;&gt;point[i][0]&gt;&gt;point[i][1];
+    }//记录点坐标信息
+    for(int i=0; i&lt;n; i++)
+    {//计算过点斜率
+        int other=0;
+        for(int j=i+1; j&lt;n; j++)
+        {
+            //从i开始遍历点计算直线
+            int y=(point[j][0]-point[i][0]);
+            if(y!=0)
+            {
+                point[j][2]=((point[j][1]-point[i][1])/y);
+                point[j][3]=1;
+                for(int k=j-1; k&gt;i; k--)
+                {
+                    if(point[k][2]==point[j][2])
+                    {
+                        point[j][3]+=point[k][3];break;
+                    }
+                }
+            }
+            else
+            {
+                point[j][3]=0;
+                other++;//不存在的斜率次数计算
+            }//计算过该点的各斜率出现的次数；
+            if((point[j][3]+1)&gt;max)
+                max=point[j][3]+1;
         }
-        System.out.println(" ");
-        int x1=0;//任何数和0异或都为其本身
-        for(int i=0;i&lt;=N-1;i++) {
-            x1 = (x1^(i));
-        }//因为已知arr中为[1,N-1]连续整数+一个唯一重复数，arr异或[1,N-1]结果则为那个唯一重复数，该循环的目的是得到[1,N-1]中的各个数异或结果x1
-        for(int i=0;i&lt;=N-1;i++) {
-            x1 = (x1^(arr[i]));
-        }//该循环的目的是将arr数组中的各个数进行连续异或，并将异或结果同x1进行异或
-        System.out.println("该数组的唯一重复数为："+x1);
+        if(other&gt;max)
+                    max=other;
+        if(max&gt;n-i-1)
+            break;
     }
+    cout&lt;&lt;max&lt;&lt;endl;
+    return 0;
 }
 </code></pre>
-<h4 id="解题核心："><a href="#解题核心：" class="headerlink" title="解题核心："></a>解题核心：</h4><p>​    1、已知数串结构为 一组已知连续整数+已知连续整数中的一个数</p>
-<p>​    2、利用A^A=0,A^0=A(同自己求异或为0，同0求异或为自己)</p>
-<p>​    3、自反性A^B^B=A^0=A，连续和同一个因子做异或运算，最终结果为自己</p>
+<h3 id="两次结果（是否提前结束计算对比）"><a href="#两次结果（是否提前结束计算对比）" class="headerlink" title="两次结果（是否提前结束计算对比）"></a>两次结果（是否提前结束计算对比）</h3><p><img src="data:image/png;base64,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" alt="img"></p>
  
       <!-- reward -->
       
@@ -218,7 +243,7 @@ public class hell {
     <a class="modal-close" href="javascript:;"><i class="ri-close-circle-line"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://xxo47oxx.github.io/posts/8253/" alt="微信分享二维码">
+      <img src="//api.qrserver.com/v1/create-qr-code/?size=150x150&data=http://xxo47oxx.github.io/posts/d0e/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -231,19 +256,10 @@ public class hell {
    
   <nav class="article-nav">
     
-      <a href="/posts/0/" class="article-nav-link">
-        <strong class="article-nav-caption">上一篇</strong>
-        <div class="article-nav-title">
-          
-            数据结构与算法 查找与排序（下）
-          
-        </div>
-      </a>
     
-    
-      <a href="/posts/70e0/" class="article-nav-link">
+      <a href="/posts/2eaf/" class="article-nav-link">
         <strong class="article-nav-caption">下一篇</strong>
-        <div class="article-nav-title">2021/12/29 note</div>
+        <div class="article-nav-title">数据结构与算法 位运算</div>
       </a>
     
   </nav>
